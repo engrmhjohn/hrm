@@ -1,14 +1,12 @@
 <nav class="sidebar">
     <div class="logo d-flex justify-content-between">
-        <a class="large_logo" href="index.html"><img src="{{ asset('backendAsset') }}/img/logo.png"
-                alt=""></a>
-        <a class="small_logo" href="index.html"><img src="{{ asset('backendAsset') }}/img/mini_logo.png"
-                alt=""></a>
+        <a class="large_logo" href="{{url('/admin/dashboard')}}">HR Management</a>
+        <a class="small_logo" href="{{url('/admin/dashboard')}}">HR Management</a>
         <div class="sidebar_close_icon d-lg-none">
             <i class="ti-close"></i>
         </div>
     </div>
-    <ul id="sidebar_menu">
+    {{-- <ul id="sidebar_menu">
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">
@@ -351,6 +349,78 @@
             <ul>
                 <li><a href="mapjs.html">Maps JS</a></li>
                 <li><a href="vector_map.html">Vector Maps</a></li>
+            </ul>
+        </li>
+    </ul> --}}
+    <ul id="sidebar_menu">
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{{ asset('backendAsset') }}/img/menu-icon/4.svg" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Department</span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="{{ route('admin.manage.department') }}">Department List</a></li>
+                <li><a href="{{ route('admin.department') }}">Add New Department</a></li>
+            </ul>
+        </li>
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{{ asset('backendAsset') }}/img/menu-icon/4.svg" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Designation</span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="{{ route('admin.manage.designation') }}">Designation List</a></li>
+                <li><a href="{{ route('admin.designation') }}">Add New Designation</a></li>
+            </ul>
+        </li>
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{{ asset('backendAsset') }}/img/menu-icon/4.svg" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Work Shifts</span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="{{ route('admin.manage.shifts') }}">Shifts List</a></li>
+                <li><a href="{{ route('admin.shifts') }}">Add New Shifts</a></li>
+            </ul>
+        </li>
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{{ asset('backendAsset') }}/img/menu-icon/4.svg" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Pay Slip</span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="{{ route('admin.manage.pay_slip') }}">Pay Slip List</a></li>
+                <li><a href="{{ route('admin.pay_slip') }}">Add New Pay Slip</a></li>
+            </ul>
+        </li>
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{{ asset('backendAsset') }}/img/menu-icon/4.svg" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Employee</span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="{{ route('admin.manage.employee') }}">Employee List</a></li>
+                <li><a href="{{ route('admin.employee') }}">Add New Employee</a></li>
             </ul>
         </li>
     </ul>

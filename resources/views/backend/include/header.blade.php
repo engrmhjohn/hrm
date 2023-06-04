@@ -139,7 +139,7 @@
                             <h5>{{Auth::user()->name}}</h5>
                         </div>
                         <div class="profile_info_details">
-                            <a href="#">My Profile </a>
+                            <a href="{{route('admin.admin.admin_profile')}}">My Profile </a>
                             <a href="#">Settings</a>
                             <a href="#"
                                 onclick="event.preventDefault(); document.getElementById('logout').submit()">Log
