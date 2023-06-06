@@ -423,5 +423,18 @@
                 <li><a href="{{ route('admin.employee') }}">Add New Employee</a></li>
             </ul>
         </li>
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{{ asset('backendAsset') }}/img/menu-icon/4.svg" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Holiday</span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="{{ route('admin.calendar') }}">Calendar</a></li>
+            </ul>
+        </li>
     </ul>
 </nav>

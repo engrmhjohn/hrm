@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CalendarController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Admin\EmployeeController;
@@ -82,6 +83,13 @@ Route::middleware('auth:admin')->name('admin.')->group(function () {
         Route::get('/edit-employee/{id}', 'editEmployee')->name('edit.employee');
         Route::post('/update-employee', 'updateEmployee')->name('update.employee');
         Route::post('/delete-employee', 'deleteEmployee')->name('delete.employee');
+    });
+
+    Route::controller(CalendarController::class)->prefix('/admin')->group(function () {
+        Route::get('/calendar', 'calendar')->name('calendar');
+        Route::post('/event-store', 'store')->name('event.store');
+        Route::patch('/event-update/{id}', 'update')->name('event.update');
+        Route::delete('/event-destroy/{id}', 'destroy')->name('event.destroy');
     });
 
 

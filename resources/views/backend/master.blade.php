@@ -41,27 +41,31 @@
 
     <link rel="stylesheet" href="{{ asset('backendAsset/css/style1.css') }}" />
     <link rel="stylesheet" href="{{ asset('backendAsset/css/colors/default.css') }}" id="colorSkinCSS">
+
+    {{-- calendar cdn --}}
+
+
 </head>
 
 <body class="crm_body_bg">
 
 
-@include('backend.include.sidebar')
+    @include('backend.include.sidebar')
 
     <section class="main_content dashboard_part large_header_bg">
 
         <div class="container-fluid g-0">
-           @include('backend.include.header')
+            @include('backend.include.header')
         </div>
 
         <div class="main_content_iner overly_inner ">
             <div class="container-fluid p-0 ">
 
-@yield('content')
+                @yield('content')
             </div>
         </div>
 
-@include('backend.include.footer')
+        @include('backend.include.footer')
     </section>
 
 
