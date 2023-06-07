@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-header">Edit Pay Slip</div>
                 <div class="card-body">
-                    <a href="{{ route('admin.manage.pay_slip') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                    <a href="{{ route('admin.manage.pay_slip') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="zmdi zmdi-arrow-left" aria-hidden="true"></i> Back</button></a>
                     <br />
                     <br />
                     <form action="{{route('admin.update.pay_slip')}}" method="post">
@@ -20,13 +20,13 @@
                             Status
                         </div>
                         <div class="col-md-9 mt-3">
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label" for="inlineRadio1">Publish</label>
-                                <input class="form-check-input" type="radio" name="status" {{ ( isset($pay_slip->status) && $pay_slip->status == 1) ? 'checked': ''}} id="inlineRadio1" value="1">
-                              </div>
-                              <div class="form-check form-check-inline">
-                                  <label class="form-check-label" for="inlineRadio2">Unpublish</label>
-                                <input class="form-check-input" type="radio" name="status" {{ ( isset($pay_slip->status) && $pay_slip->status == 0) ? 'checked': ''}} id="inlineRadio2" value="0">
+                            <div class="radio inlineblock m-r-20">
+                                <input type="radio" name="status" id="male" class="with-gap" {{ ( isset($pay_slip->status) && $pay_slip->status == 1) ? 'checked': ''}} checked value="option1">
+                                <label for="male">Publish</label>
+                            </div>
+                            <div class="radio inlineblock">
+                                <input type="radio" name="status" {{ ( isset($pay_slip->status) && $pay_slip->status == 0) ? 'checked': ''}} id="Female" class="with-gap" value="option2">
+                                <label for="Female">Unpublish</label>
                             </div>
                         </div>
 

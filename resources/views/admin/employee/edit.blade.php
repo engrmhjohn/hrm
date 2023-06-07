@@ -6,7 +6,7 @@
                 <div class="card-header">Edit Employee</div>
                 <div class="card-body">
                     <a href="{{ route('admin.manage.employee') }}" title="Back"><button class="btn btn-warning btn-sm"><i
-                                class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                                class="zmdi zmdi-arrow-left" aria-hidden="true"></i> Back</button></a>
                     <br />
                     <br />
                     <form action="{{ route('admin.update.employee') }}" method="post" enctype="multipart/form-data">

@@ -19,15 +19,26 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<style>
-    .fc-event {
-        width: 140px;
-        height: 85px;
-        display: flex;
-        flex-wrap: wrap;
-        align-content: center;
-    }
-</style>
+    <style>
+        .fc-event {
+            width: 95%;
+            height: 85px;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: center;
+            text-align: center;
+        }
+        .fc-event .fc-content{
+            margin: 0 auto !important;
+        }
+        .fc-toolbar.fc-header-toolbar{
+            margin-top: 1rem;
+            background: #bdb8b8;
+        }
+        .fc-left, .fc-right{
+            margin-top: 5px !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -56,9 +67,6 @@
                     <input type="text" class="form-control mb-3" name="title" id="title"
                         placeholder="Event Title">
                     <span id="titleError" class="text-danger mb-3"></span>
-                    <input type="text" class="form-control" name="description" id="description"
-                        placeholder="Event Description">
-                    <span id="descriptionError" class="text-danger mb-3"></span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -89,11 +97,11 @@
                 selectHelper: true,
                 defaultView: 'month',
                 select: function(start, end, allDays) {
+                    $('#title').val(''); // Clear the title input field
                     $('#eventBookingModal').modal('show');
 
                     $('#saveEventBtn').click(function() {
                         var title = $('#title').val();
-                        var description = $('#description').val();
                         // var start_date = moment(start).format('MM-DD-YYYY');
                         // var end_date = moment(end).format('MM-DD-YYYY');
 
@@ -106,25 +114,22 @@
                             dataType: 'json',
                             data: {
                                 title,
-                                description,
                                 start_date,
                                 end_date
                             },
                             success: function(response) {
-                                $('#eventBookingModal').modal('hide');
+                                $('#eventBookingModal').modal('hide'),
                                 $('#calendar').fullCalendar('renderEvent', {
                                     'title': response.title,
-                                    'description': response.description,
                                     'start': response.start_date,
                                     'end': response.end_date
-                                });
+                                })
+                                swal("Good job!", "Event Added!", "success");
                             },
                             error: function(err) {
                                 if (err.responseJSON.errors) {
                                     $('#titleError').html(err.responseJSON.errors
                                         .title);
-                                    $('#descriptionError').html(err.responseJSON
-                                        .errors.description);
                                 }
                             },
                         });
@@ -144,40 +149,36 @@
                             end_date
                         },
                         success: function(response) {
-                            console.log(response)
                             swal("Good job!", "Event Updated!", "success");
                         },
                         error: function(error) {
-                            console.log(error)
                         },
                     });
                 },
-                eventClick: function(event){
+                eventClick: function(event) {
                     var id = event.id;
-                    if(confirm('Are you sure want to remove it')){
+                    if (confirm('Are you sure want to remove it')) {
                         $.ajax({
-                            url:"{{ route('admin.event.destroy', '') }}" +'/'+ id,
-                            type:"DELETE",
-                            dataType:'json',
-                            success:function(response)
-                            {
+                            url: "{{ route('admin.event.destroy', '') }}" + '/' + id,
+                            type: "DELETE",
+                            dataType: 'json',
+                            success: function(response) {
                                 $('#calendar').fullCalendar('removeEvents', response);
                                 swal("Good job!", "Event Deleted!", "success");
                             },
-                            error:function(error)
-                            {
+                            error: function(error) {
                                 console.log(error)
                             },
                         });
                     }
                 },
-                selectAllow: function(event)
-                {
-                    return moment(event.start).utcOffset(false).isSame(moment(event.end).subtract(1, 'second').utcOffset(false), 'day');
+                selectAllow: function(event) {
+                    return moment(event.start).utcOffset(false).isSame(moment(event.end).subtract(1,
+                        'second').utcOffset(false), 'day');
                 },
 
             });
-            $("#eventBookingModal").on("hidden.bs.modal", function () {
+            $("#eventBookingModal").on("hidden.bs.modal", function() {
                 $('#saveEventBtn').unbind();
             });
 

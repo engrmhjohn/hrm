@@ -6,7 +6,7 @@
                 <div class="card-header">Employee</div>
                 <div class="card-body">
                     <a href="{{ route('admin.manage.employee') }}" title="Back"><button class="btn btn-warning btn-sm"><i
-                                class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                                class="zmdi zmdi-arrow-left" aria-hidden="true"></i> Back</button></a>
                     <br />
                     <br />
                     <form action="{{ route('admin.save.employee') }}" method="post" enctype="multipart/form-data">
@@ -38,16 +38,16 @@
                             <div class="col-md-3 mb-3">
                                 Gender
                             </div>
-                            <div class="col-md-9 mb-3">
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="inlineRadio1">Male</label>
-                                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1"
-                                        value="1">
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="inlineRadio2">Female</label>
-                                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2"
-                                        value="0">
+                            <div class="col-md-9 mt-3">
+                                <div class="form-group">
+                                    <div class="radio inlineblock m-r-20">
+                                        <input type="radio" name="gender" id="male" class="with-gap" checked value="option1">
+                                        <label for="male">Male</label>
+                                    </div>
+                                    <div class="radio inlineblock">
+                                        <input type="radio" name="gender" id="Female" class="with-gap" value="option2">
+                                        <label for="Female">Female</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -109,12 +109,12 @@
                                     {!! $errors->first('other', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
-                            <div class="col-lg-12">
-                                <div class="form-group {{ $errors->has('image') ? 'has-error' : ''}}">
-                                    <label for="image" class="control-label">{{ 'Image' }}</label>
-                                    <input class="form-control" name="image" type="file" id="image">
-                                    {!! $errors->first('image', '<p class="help-block">:message</p>') !!}
-                                </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group {{ $errors->has('image') ? 'has-error' : ''}}">
+                                <label for="image" class="control-label">{{ 'Image' }}</label>
+                                <input class="form-control" name="image" type="file" id="image">
+                                {!! $errors->first('image', '<p class="help-block">:message</p>') !!}
                             </div>
                         </div>
 
@@ -122,15 +122,15 @@
                             Status
                         </div>
                         <div class="col-md-9 mt-3">
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label" for="inlineRadio1">Publish</label>
-                                <input class="form-check-input" type="radio" checked name="status" id="inlineRadio1"
-                                    value="1">
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label" for="inlineRadio2">Unpublish</label>
-                                <input class="form-check-input" type="radio" name="status" id="inlineRadio2"
-                                    value="0">
+                            <div class="form-group">
+                                <div class="radio inlineblock m-r-20">
+                                    <input type="radio" name="status" id="male" class="with-gap" checked value="option1">
+                                    <label for="male">Publish</label>
+                                </div>
+                                <div class="radio inlineblock">
+                                    <input type="radio" name="status" id="Female" class="with-gap" value="option2">
+                                    <label for="Female">Unpublish</label>
+                                </div>
                             </div>
                         </div>
 

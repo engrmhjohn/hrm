@@ -23,7 +23,6 @@ class CalendarController extends Controller
             $events[] = [
                 'id' => $booking->id,
                 'title' => $booking->title,
-                'description' => $booking->description,
                 'start' => $booking->start_date,
                 'end' => $booking->end_date,
                 'color' => $color
@@ -39,11 +38,9 @@ class CalendarController extends Controller
     {
         $request->validate([
             'title' => 'required|string',
-            'description' => 'required|string',
         ]);
         $booking = Booking::create([
             'title' => $request->title,
-            'description' => $request->description,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
         ]);
@@ -57,7 +54,6 @@ class CalendarController extends Controller
             'start' => $booking->start_date,
             'end' => $booking->end_date,
             'title' => $booking->title,
-            'description' => $booking->description,
             'color' => $color ? $color: '',
 
         ]);
