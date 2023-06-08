@@ -11,6 +11,8 @@ use App\Models\Shift;
 use Illuminate\Http\Request;
 use App\Helper\image;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+
 
 require_once app_path('Helper/image.php');
 
@@ -81,9 +83,8 @@ class EmployeeController extends Controller
         $employee->other = $request->other;
         $employee->status = $request->status;
         if ($request->file('image')) {
-
-            if (isset($employee->image)) {
-                unlink($employee->image);
+            if ($employee->image) {
+                Storage::delete($employee->image);
             }
             $employee->image = image_upload($request->image);
         }

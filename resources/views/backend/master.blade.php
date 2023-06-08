@@ -9,15 +9,17 @@
     <title>Admin :: Home</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
     <link rel="stylesheet" href="{{ asset('adminAssets') }}/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('adminAssets') }}/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('adminAssets') }}/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css" />
     <link rel="stylesheet" href="{{ asset('adminAssets') }}/plugins/charts-c3/plugin.css" />
 
     <link rel="stylesheet" href="{{ asset('adminAssets') }}/plugins/morrisjs/morris.min.css" />
     <link rel="stylesheet" href="{{ asset('adminAssets') }}/plugins/select2/select2.css" />
+    {{-- dropify --}}
+    <link rel="stylesheet" href="{{asset('adminAssets')}}/plugins/dropify/css/dropify.min.css">
+    {{-- dropify --}}
 
     <!-- Custom Css -->
-    <link rel="stylesheet" href="{{ asset('adminAssets') }}/css/style.min.css">
+    <link rel="stylesheet" href="{{asset('adminAssets')}}/css/style.min.css">
 </head>
 
 <body class="theme-blush">
@@ -89,8 +91,12 @@
     <script src="{{ asset('adminAssets') }}/bundles/mainscripts.bundle.js"></script>
     <script src="{{ asset('adminAssets') }}/js/pages/index.js"></script>
     <script src="{{ asset('adminAssets') }}/plugins/select2/select2.min.js"></script> <!-- Select2 Js -->
-
     <script src="assets/js/pages/forms/advanced-form-elements.js"></script>
+
+    {{-- dropify --}}
+    <script src="{{asset('adminAssets')}}/plugins/dropify/js/dropify.min.js"></script>
+    <script src="{{asset('adminAssets')}}/js/pages/forms/dropify.js"></script>
+    {{-- dropify --}}
 </body>
 
 </html>

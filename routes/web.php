@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CalendarController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\PaySlipController;
 use App\Http\Controllers\Admin\ShiftsController;
 use Illuminate\Support\Facades\Route;
@@ -90,6 +91,18 @@ Route::middleware('auth:admin')->name('admin.')->group(function () {
         Route::post('/event-store', 'store')->name('event.store');
         Route::patch('/event-update/{id}', 'update')->name('event.update');
         Route::delete('/event-destroy/{id}', 'destroy')->name('event.destroy');
+    });
+
+    Route::controller(LocationController::class)->prefix('/admin')->group(function () {
+        Route::get('/location', 'location')->name('location');
+        Route::post('/save-location', 'saveLocation')->name('save.location');
+        Route::get('/manage-location', 'manageLocation')->name('manage.location');
+        Route::get('/edit-location/{id}', 'editLocation')->name('edit.location');
+        Route::post('/update-location', 'updateLocation')->name('update.location');
+        Route::post('/delete-location', 'deleteLocation')->name('delete.location');
+
+
+        Route::get('/test', 'test')->name('test');
     });
 
 

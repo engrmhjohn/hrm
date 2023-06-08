@@ -42,18 +42,17 @@
                             <div class="col-md-3 mb-3">
                                 Gender
                             </div>
-                            <div class="col-md-9 mb-3">
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="inlineRadio1">Male</label>
-                                    <input class="form-check-input" type="radio" name="gender"
-                                        {{ isset($employee->status) && $employee->status == 1 ? 'checked' : '' }}
-                                        id="inlineRadio1" value="1">
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="inlineRadio2">Female</label>
-                                    <input class="form-check-input" type="radio" name="gender"
-                                        {{ isset($employee->status) && $employee->status == 0 ? 'checked' : '' }}
-                                        id="inlineRadio2" value="0">
+
+                            <div class="col-md-9 mt-3">
+                                <div class="form-group">
+                                    <div class="radio inlineblock m-r-20">
+                                        <input type="radio" name="gender" id="male" class="with-gap" {{ isset($employee->status) && $employee->status == 1 ? 'checked' : '' }} checked value="option1">
+                                        <label for="male">Male</label>
+                                    </div>
+                                    <div class="radio inlineblock">
+                                        <input type="radio" name="gender" {{ isset($employee->status) && $employee->status == 0 ? 'checked' : '' }} id="Female" class="with-gap" value="option2">
+                                        <label for="Female">Female</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -127,13 +126,20 @@
                                     {!! $errors->first('other', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
-                            <div class="col-lg-12">
-                                <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
-                                    <img src="{{ asset($employee->image) }}" alt=""
+                            <div class="col-lg-4 col-md-6">
+                                <div class="card">
+                                    <div class="header">
+                                        <h2>Employee Current Image</h2>
+                                        <img src="{{ asset($employee->image) }}" alt=""
                                         style="height: 200px; width: 200px;" class="mb-3">
-                                    <input class="form-control" name="image" type="file" id="image"
-                                        value="{{ isset($employee->image) ? $employee->image : '' }}">
-                                    {!! $errors->first('image', '<p class="help-block">:message</p>') !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="card">
+                                    <div class="body">
+                                        <input type="file" name="image" class="dropify" value="{{ isset($employee->image) ? $employee->image : '' }}">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -141,18 +147,17 @@
                         <div class="col-md-3 mt-3">
                             Status
                         </div>
+
                         <div class="col-md-9 mt-3">
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label" for="inlineRadio1">Publish</label>
-                                <input class="form-check-input" type="radio" name="status"
-                                    {{ isset($employee->status) && $employee->status == 1 ? 'checked' : '' }}
-                                    id="inlineRadio1" value="1">
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label" for="inlineRadio2">Unpublish</label>
-                                <input class="form-check-input" type="radio" name="status"
-                                    {{ isset($employee->status) && $employee->status == 0 ? 'checked' : '' }}
-                                    id="inlineRadio2" value="0">
+                            <div class="form-group">
+                                <div class="radio inlineblock m-r-20">
+                                    <input type="radio" name="status" id="male" class="with-gap"  {{ isset($employee->status) && $employee->status == 1 ? 'checked' : '' }} checked value="option1">
+                                    <label for="male">Publish</label>
+                                </div>
+                                <div class="radio inlineblock">
+                                    <input type="radio" name="status" {{ isset($employee->status) && $employee->status == 0 ? 'checked' : '' }} id="Female" class="with-gap" value="option2">
+                                    <label for="Female">Unpublish</label>
+                                </div>
                             </div>
                         </div>
 

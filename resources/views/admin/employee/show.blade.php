@@ -110,11 +110,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12">
-                            <div class="form-group {{ $errors->has('image') ? 'has-error' : ''}}">
-                                <label for="image" class="control-label">{{ 'Image' }}</label>
-                                <input class="form-control" name="image" type="file" id="image">
-                                {!! $errors->first('image', '<p class="help-block">:message</p>') !!}
+                        <div class="col-lg-4 col-md-4">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>Image</h2>
+                                </div>
+                                <div class="body">
+                                    <input type="file" name="image" class="dropify">
+                                </div>
                             </div>
                         </div>
 

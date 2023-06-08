@@ -41,14 +41,15 @@
                 </ul>
             </li>
 
-            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>Pay Slip</span></a>
+            <li><a href="javascript:void(0);" class="menu-toggle"><i
+                class="zmdi zmdi-assignment"></i><span>Pay Slip</span></a>
                 <ul class="ml-menu">
                     <li><a href="{{ route('admin.manage.pay_slip') }}">Pay Slip List</a></li>
                     <li><a href="{{ route('admin.pay_slip') }}">Add New Pay Slip</a></li>
                 </ul>
             </li>
 
-            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>Employee</span></a>
+            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account"></i><span>Employee</span></a>
                 <ul class="ml-menu">
                     <li><a href="{{ route('admin.manage.employee') }}">Employee List</a></li>
                     <li><a href="{{ route('admin.employee') }}">Add New Employee</a></li>
@@ -61,7 +62,8 @@
                 </ul>
             </li>
 
-            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>Location</span></a>
+            <li><a href="javascript:void(0);" class="menu-toggle"><i
+                class="zmdi zmdi-map"></i> <span>Location</span></a>
                 <ul class="ml-menu">
                     <li><a href="">Location List</a></li>
                     <li><a href="">Add New Location</a></li>
