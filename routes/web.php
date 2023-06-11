@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\LocationController;
+use App\Http\Controllers\Admin\MapController;
 use App\Http\Controllers\Admin\PaySlipController;
 use App\Http\Controllers\Admin\ShiftsController;
 use Illuminate\Support\Facades\Route;
@@ -93,16 +94,13 @@ Route::middleware('auth:admin')->name('admin.')->group(function () {
         Route::delete('/event-destroy/{id}', 'destroy')->name('event.destroy');
     });
 
-    Route::controller(LocationController::class)->prefix('/admin')->group(function () {
-        Route::get('/location', 'location')->name('location');
-        Route::post('/save-location', 'saveLocation')->name('save.location');
+    Route::controller(MapController::class)->prefix('/admin')->group(function () {
+        Route::get('/url', 'takeUrl')->name('url');
+        Route::post('/coordinates', 'getCoordinates')->name('get_coordinates');
         Route::get('/manage-location', 'manageLocation')->name('manage.location');
-        Route::get('/edit-location/{id}', 'editLocation')->name('edit.location');
-        Route::post('/update-location', 'updateLocation')->name('update.location');
-        Route::post('/delete-location', 'deleteLocation')->name('delete.location');
-
-
-        Route::get('/test', 'test')->name('test');
+        Route::get('/edit-location/{id}', 'editUrl')->name('edit.location');
+        Route::post('/update-location/{id}', 'updateUrl')->name('update.location');
+        Route::delete('/delete-location/{id}', 'deleteLocation')->name('delete.location');
     });
 
 

@@ -65,8 +65,8 @@
             <li><a href="javascript:void(0);" class="menu-toggle"><i
                 class="zmdi zmdi-map"></i> <span>Location</span></a>
                 <ul class="ml-menu">
-                    <li><a href="">Location List</a></li>
-                    <li><a href="">Add New Location</a></li>
+                    <li><a href="{{ route('admin.manage.location') }}">Location List</a></li>
+                    <li><a href="{{ route('admin.url') }}">Add New Location</a></li>
                 </ul>
             </li>
 
