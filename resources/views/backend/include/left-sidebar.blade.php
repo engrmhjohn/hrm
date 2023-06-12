@@ -69,6 +69,14 @@
                     <li><a href="{{ route('admin.url') }}">Add New Location</a></li>
                 </ul>
             </li>
+
+            <li><a href="javascript:void(0);" class="menu-toggle"><i
+                class="zmdi zmdi-assignment"></i></i> <span>Payroll Setting</span></a>
+                <ul class="ml-menu">
+                    <li><a href="{{ route('admin.manage.payroll.setting') }}">Employee Payroll Setting</a></li>
+                    <li><a href="{{ route('admin.payroll.setting') }}">Add Employee Payroll Setting</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </aside>

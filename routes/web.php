@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\MapController;
+use App\Http\Controllers\Admin\PayrollSettingController;
 use App\Http\Controllers\Admin\PaySlipController;
 use App\Http\Controllers\Admin\ShiftsController;
 use Illuminate\Support\Facades\Route;
@@ -111,6 +112,15 @@ Route::middleware('auth:admin')->name('admin.')->group(function () {
         Route::get('/edit-location/{id}', 'editUrl')->name('edit.location');
         Route::post('/update-location/{id}', 'updateUrl')->name('update.location');
         Route::delete('/delete-location/{id}', 'deleteLocation')->name('delete.location');
+    });
+
+    Route::controller(PayrollSettingController::class)->prefix('/admin')->group(function () {
+        Route::get('/payroll-setting', 'payrollSetting')->name('payroll.setting');
+        Route::post('/save-payroll-setting', 'savePayrollSetting')->name('save.payroll.setting');
+        Route::get('/manage-payroll-setting', 'managePayrollSetting')->name('manage.payroll.setting');
+        Route::get('/edit-payroll-setting/{id}', 'editPayrollSetting')->name('edit.payroll.setting');
+        Route::post('/update-payroll-setting', 'updatePayrollSetting')->name('update.payroll.setting');
+        Route::post('/delete-payroll-setting', 'deletePayrollSetting')->name('delete.payroll.setting');
     });
 
 

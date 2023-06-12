@@ -112,6 +112,10 @@
     {{-- calendar --}}
     <script src="{{ asset('adminAssets') }}/bundles/fullcalendarscripts.bundle.js"></script>
     {{-- calendar --}}
+
+    {{-- custom_js --}}
+    <script src="{{ asset('adminAssets') }}/js/custom.js"></script>
+    {{-- custom_js --}}
     @yield('script')
 </body>
 

@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('payroll_settings', function (Blueprint $table) {
             $table->id();
+            $table->string('payroll_type');
+            $table->string('employee_id')->nullable();
+            $table->string('department_id')->nullable();
+            $table->string('late_in_cut');
+            $table->string('early_out_cut');
+            $table->string('unpaid_leave_cut');
+            $table->string('absent_cut');
+            $table->string('bonus');
+            $table->string('bonus_month');
             $table->timestamps();
         });
     }
