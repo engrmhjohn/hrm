@@ -13,6 +13,13 @@
                         @csrf
                         <div class="row">
                             <div class="col-lg-12 mb-3">
+                                <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                                    <label for="name" class="control-label">{{ 'Name' }}</label>
+                                    <input class="form-control" name="name" type="text" id="name" value="{{ $location->name }}">
+                                    {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mb-3">
                                 <div class="form-group {{ $errors->has('url') ? 'has-error' : '' }}">
                                     <label for="url" class="control-label">{{ 'Google Map URL' }}</label>
                                     <input class="form-control" name="url" type="text" required id="url" value="{{ $location->url }}">

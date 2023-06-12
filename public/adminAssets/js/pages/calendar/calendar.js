@@ -1,10 +1,12 @@
-$(function() {
+
+
+$(function () {
 
     enableDrag();
 
-    function enableDrag(){
+    function enableDrag() {
 
-        $('#external-events .fc-event').each(function() {
+        $('#external-events .fc-event').each(function () {
 
             $(this).data('event', {
 
@@ -34,23 +36,55 @@ $(function() {
 
 
 
-    $(".save-event").on('click', function() {
+    $("#saveEventBtn").on('click', function () {
 
-        var categoryName = $('#addNewEvent form').find("input[name='category-name']").val();
+        var title = $('#title').val();
+        var start_date = moment(start).format('YYYY-MM-DD');
+        var end_date = moment(end).format('YYYY-MM-DD');
+        console.log(title);
+        $.ajax({
+            url: "{{ route('admin.event.store') }}",
+            type: "POST",
+            dataType: 'json',
+            data: {
+                title,
+                start_date,
+                end_date
+            },
+            success: function (response) {
+                $('#eventBookingModal').modal('hide');
+                $('#calendar').fullCalendar('renderEvent', {
+                    'title': title,
+                    'start': start_date,
+                    'end': end_date
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Created successfully'
+                });
+            },
+            error: function (err) {
+                if (err.responseJSON.errors) {
+                    $('#titleError').html(err.responseJSON.errors.title);
+                }
+            },
+        });
 
-        var categoryColor = $('#addNewEvent form').find("select[name='category-color']").val();
+        // var categoryName = $('#addNewEvent form').find("input[name='category-name']").val();
 
-        if (categoryName !== null && categoryName.length != 0) {
+        // var categoryColor = $('#addNewEvent form').find("select[name='category-color']").val();
 
-            $('#event-list').append('<div class="fc-event bg-' + categoryColor + '" data-class="bg-' + categoryColor + '">' + categoryName + '</div>');
+        // if (categoryName !== null && categoryName.length != 0) {
 
-            $('#addNewEvent form').find("input[name='category-name']").val("");
+        //     $('#event-list').append('<div class="fc-event bg-' + categoryColor + '" data-class="bg-' + categoryColor + '">' + categoryName + '</div>');
 
-            $('#addNewEvent form').find("select[name='category-color']").val("");
+        //     $('#addNewEvent form').find("input[name='category-name']").val("");
 
-            enableDrag();
+        //     $('#addNewEvent form').find("select[name='category-color']").val("");
 
-        }
+        //     enableDrag();
+
+        // }
 
     });
 
@@ -60,15 +94,15 @@ $(function() {
 
     var dd = today.getDate();
 
-    var mm = today.getMonth()+1; //January is 0!
+    var mm = today.getMonth() + 1; //January is 0!
 
     var yyyy = today.getFullYear();
 
 
 
-    if(dd<10) { dd = '0'+dd }
+    if (dd < 10) { dd = '0' + dd }
 
-    if(mm<10) { mm = '0'+mm } 
+    if (mm < 10) { mm = '0' + mm }
 
 
 
@@ -80,7 +114,7 @@ $(function() {
 
     // Add direct event to calendar
 
-    var newEvent = function(start) {
+    var newEvent = function (start) {
 
         $('#addDirectEvent input[name="event-name"]').val("");
 
@@ -90,11 +124,11 @@ $(function() {
 
         $('#addDirectEvent .save-btn').unbind();
 
-        $('#addDirectEvent .save-btn').on('click', function() {
+        $('#addDirectEvent .save-btn').on('click', function () {
 
             var title = $('#addDirectEvent input[name="event-name"]').val();
 
-            var classes = 'bg-'+ $('#addDirectEvent select[name="event-bg"]').val();
+            var classes = 'bg-' + $('#addDirectEvent select[name="event-bg"]').val();
 
             if (title) {
 
@@ -112,7 +146,7 @@ $(function() {
 
                 $('#addDirectEvent').modal('hide');
 
-                }
+            }
 
             else {
 
@@ -124,7 +158,7 @@ $(function() {
 
     }
 
-    
+
 
     // initialize the calendar
 
@@ -152,9 +186,9 @@ $(function() {
 
             {
 
-                title  : 'Birthday Party',
+                title: 'Birthday Party',
 
-                start  : current + '01',
+                start: current + '01',
 
                 className: 'bg-info'
 
@@ -162,11 +196,11 @@ $(function() {
 
             {
 
-                title  : 'Conference',
+                title: 'Conference',
 
-                start  : current + '05',
+                start: current + '05',
 
-                end    : '2018-08-07',
+                end: '2018-08-07',
 
                 className: 'bg-warning'
 
@@ -174,11 +208,11 @@ $(function() {
 
             {
 
-                title  : 'Meeting',
+                title: 'Meeting',
 
-                start  : current + '09T12:30:00',
+                start: current + '09T12:30:00',
 
-                allDay : false, // will make the time show
+                allDay: false, // will make the time show
 
                 className: 'bg-success',
 
@@ -186,29 +220,29 @@ $(function() {
 
         ],
 
-        drop: function(date,jsEvent) {
+        drop: function (date, jsEvent) {
 
-        // var originalEventObject = $(this).data('eventObject');
+            // var originalEventObject = $(this).data('eventObject');
 
-        // var $categoryClass = $(this).attr('data-class');
+            // var $categoryClass = $(this).attr('data-class');
 
-        // var copiedEventObject = $.extend({}, originalEventObject);
+            // var copiedEventObject = $.extend({}, originalEventObject);
 
-        // //console.log(originalEventObject + '--' + $categoryClass + '---' + copiedEventObject);
+            // //console.log(originalEventObject + '--' + $categoryClass + '---' + copiedEventObject);
 
-        // copiedEventObject.start = date;
+            // copiedEventObject.start = date;
 
-        // if ($categoryClass)
+            // if ($categoryClass)
 
-        //   copiedEventObject['className'] = [$categoryClass];
+            //   copiedEventObject['className'] = [$categoryClass];
 
-        // calendar.fullCalendar('renderEvent', copiedEventObject, true);
+            // calendar.fullCalendar('renderEvent', copiedEventObject, true);
 
 
 
-        // is the "remove after drop" checkbox checked?
+            // is the "remove after drop" checkbox checked?
 
-        if ($('#drop-remove').is(':checked')) {
+            if ($('#drop-remove').is(':checked')) {
 
                 // if so, remove the element from the "Draggable Events" list
 
@@ -218,13 +252,13 @@ $(function() {
 
         },
 
-        select: function(start, end, allDay) { 
+        select: function (start, end, allDay) {
 
             newEvent(start);
 
         },
 
-        eventClick: function(calEvent, jsEvent, view) {
+        eventClick: function (calEvent, jsEvent, view) {
 
             //var title = prompt('Event Title:', calEvent.title, { buttons: { Ok: true, Cancel: false} });
 
@@ -238,7 +272,7 @@ $(function() {
 
 
 
-            eventModal.find('.save-btn').click(function(){
+            eventModal.find('.save-btn').click(function () {
 
                 calEvent.title = eventModal.find("input[name='event-name']").val();
 

@@ -85,6 +85,9 @@ Route::middleware('auth:admin')->name('admin.')->group(function () {
         Route::get('/edit-employee/{id}', 'editEmployee')->name('edit.employee');
         Route::post('/update-employee', 'updateEmployee')->name('update.employee');
         Route::post('/delete-employee', 'deleteEmployee')->name('delete.employee');
+
+
+        Route::get('/test', 'test')->name('test');
     });
 
     Route::controller(CalendarController::class)->prefix('/admin')->group(function () {
@@ -92,6 +95,13 @@ Route::middleware('auth:admin')->name('admin.')->group(function () {
         Route::post('/event-store', 'store')->name('event.store');
         Route::patch('/event-update/{id}', 'update')->name('event.update');
         Route::delete('/event-destroy/{id}', 'destroy')->name('event.destroy');
+
+
+        //testing another tamplate
+        Route::get('/temp', 'temp')->name('temp');
+        Route::post('/temp-store', 'tempstore')->name('temp.store');
+        Route::patch('/temp-update/{id}', 'tempupdate')->name('temp.update');
+        Route::delete('/temp-destroy/{id}', 'tempdestroy')->name('temp.destroy');
     });
 
     Route::controller(MapController::class)->prefix('/admin')->group(function () {

@@ -10,6 +10,7 @@ use App\Models\PaySlip;
 use App\Models\Shift;
 use Illuminate\Http\Request;
 use App\Helper\image;
+use App\Models\Location;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,6 +23,7 @@ class EmployeeController extends Controller
     {
         return view('admin.employee.show', [
             'departments' => Department::all(),
+            'locations' => Location::all(),
             'designations' => Designation::all(),
             'shifts' => Shift::all(),
             'pay_slips' => PaySlip::all(),
@@ -39,6 +41,7 @@ class EmployeeController extends Controller
         $employee->designation_id = $request->designation_id;
         $employee->shift_id = $request->shift_id;
         $employee->pay_slip_id = $request->pay_slip_id;
+        $employee->location_id = $request->location_id;
         $employee->salary = $request->salary;
         $employee->food_allowance = $request->food_allowance;
         $employee->other = $request->other;
@@ -60,6 +63,7 @@ class EmployeeController extends Controller
 
         return view('admin.employee.edit', [
             'employee' => $employee,
+            'locations' => Location::all(),
             'departments' => Department::all(),
             'designations' => Designation::all(),
             'shifts' => Shift::all(),
@@ -78,6 +82,7 @@ class EmployeeController extends Controller
         $employee->designation_id = $request->designation_id;
         $employee->shift_id = $request->shift_id;
         $employee->pay_slip_id = $request->pay_slip_id;
+        $employee->location_id = $request->location_id;
         $employee->salary = $request->salary;
         $employee->food_allowance = $request->food_allowance;
         $employee->other = $request->other;
@@ -103,5 +108,9 @@ class EmployeeController extends Controller
         $employee->delete();
 
         return redirect(route('admin.manage.employee'))->with('message', 'Successfully Deleted!');
+    }
+
+    public function test(){
+        return view('admin.test.test');
     }
 }

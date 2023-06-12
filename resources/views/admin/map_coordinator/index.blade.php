@@ -38,6 +38,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Name</th>
                                     <th>URL</th>
                                     <th>Longitude</th>
                                     <th>Latitude</th>
@@ -48,6 +49,7 @@
                                 @foreach ($locations as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->name}}</td>
                                         <td>{{ $item->url}}</td>
                                         <td>{{ $item->latitude }}</td>
                                         <td>{{ $item->longitude }}</td>

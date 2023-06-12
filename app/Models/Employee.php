@@ -26,4 +26,8 @@ class Employee extends Model
     {
         return $this->hasOne(Shift::class,'id','shift_id');
     }
+    public function location()
+    {
+        return $this->hasOne(Location::class,'id','location_id');
+    }
 }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('designation_id');
             $table->string('shift_id');
             $table->string('pay_slip_id');
+            $table->string('location_id');
             $table->string('salary');
             $table->string('food_allowance');
             $table->string('other');

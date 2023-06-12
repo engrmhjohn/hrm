@@ -18,6 +18,7 @@ class MapController extends Controller
     public function getCoordinates(Request $request)
     {
         $url = $request->input('url');
+        $name = $request->input('name');
 
         if (empty($url)) {
             return redirect(route('admin.manage.location'))->with('message', 'Invalid/Empty Link!');
@@ -45,6 +46,7 @@ class MapController extends Controller
                 $location->url = $url;
                 $location->latitude = $latitude;
                 $location->longitude = $longitude;
+                $location->name = $name;
                 $location->save();
 
                 // Pass the latitude and longitude values to the view
@@ -73,6 +75,7 @@ class MapController extends Controller
     {
         $location = Location::findOrFail($id);
         $url = $request->input('url');
+        $name = $request->input('name');
 
         if (empty($url)) {
             return redirect(route('admin.manage.location'))->with('message', 'Invalid/Empty Link!');
@@ -94,6 +97,7 @@ class MapController extends Controller
                 $location->url = $url;
                 $location->latitude = $latitude;
                 $location->longitude = $longitude;
+                $location->name = $name;
                 $location->save();
 
                 return redirect(route('admin.manage.location'))->with('message', 'Successfully updated!');

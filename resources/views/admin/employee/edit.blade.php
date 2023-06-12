@@ -46,11 +46,15 @@
                             <div class="col-md-9 mt-3">
                                 <div class="form-group">
                                     <div class="radio inlineblock m-r-20">
-                                        <input type="radio" name="gender" id="male" class="with-gap" {{ isset($employee->status) && $employee->status == 1 ? 'checked' : '' }} checked value="option1">
+                                        <input type="radio" name="gender" id="male" class="with-gap"
+                                            {{ isset($employee->gender) && $employee->gender == 1 ? 'checked' : '' }}
+                                            checked value="1">
                                         <label for="male">Male</label>
                                     </div>
                                     <div class="radio inlineblock">
-                                        <input type="radio" name="gender" {{ isset($employee->status) && $employee->status == 0 ? 'checked' : '' }} id="Female" class="with-gap" value="option2">
+                                        <input type="radio" name="gender"
+                                            {{ isset($employee->gender) && $employee->gender == 0 ? 'checked' : '' }}
+                                            id="Female" class="with-gap" value="0">
                                         <label for="Female">Female</label>
                                     </div>
                                 </div>
@@ -58,8 +62,18 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12 mb-3">
+                                <label>Office Location</label>
+                                <select name="location_id" id="" class="form-control show-tick ms search-select">
+                                    <option value="" disabled selected>Select a Location</option>
+                                    @foreach($locations as $location)
+                                    <option value="{{$location->id}}" {{ isset($employee->location_id) ? ($employee->location_id == $location->id ? 'selected' : '') : '' }}>
+                                        {{ $location->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-lg-12 mb-3">
                                 <label>Department</label>
-                                <select name="department_id" id="" class="form-control">
+                                <select name="department_id" id="" class="form-control show-tick ms search-select">
                                     <option value="" disabled selected>Select a Department</option>
                                     @foreach ($departments as $department)
                                         <option value=" {{ $department->id }}"
@@ -70,7 +84,7 @@
                             </div>
                             <div class="col-lg-12 mb-3">
                                 <label>Designation</label>
-                                <select name="designation_id" id="" class="form-control">
+                                <select name="designation_id" id="" class="form-control show-tick ms search-select">
                                     <option value="" disabled selected>Select a Designation</option>
                                     @foreach ($designations as $designation)
                                         <option value=" {{ $designation->id }}"
@@ -81,25 +95,25 @@
                             </div>
                             <div class="col-lg-12 mb-3">
                                 <label>Working Shift</label>
-                                <select name="shift_id" id="" class="form-control">
+                                <select name="shift_id" id="" class="form-control show-tick ms search-select">
                                     <option value="" disabled selected>Select a Shift</option>
                                     @foreach ($shifts as $shift)
-                                    <option value=" {{ $shift->id }}"
-                                        {{ isset($employee->shift_id) ? ($employee->shift_id == $shift->id ? 'selected' : '') : '' }}>
-                                        {{ $shift->name }} </option>
-                                @endforeach
+                                        <option value=" {{ $shift->id }}"
+                                            {{ isset($employee->shift_id) ? ($employee->shift_id == $shift->id ? 'selected' : '') : '' }}>
+                                            {{ $shift->name }} </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-lg-12 mb-3">
                                 <label>Pay Slip</label>
-                                <select name="pay_slip_id" id="" class="form-control">
+                                <select name="pay_slip_id" id="" class="form-control show-tick ms search-select">
                                     <option value="" disabled selected>Select a Pay Slip</option>
 
                                     @foreach ($pay_slips as $pay_slip)
-                                    <option value=" {{ $pay_slip->id }}"
-                                        {{ isset($employee->pay_slip_id) ? ($employee->pay_slip_id == $pay_slip->id ? 'selected' : '') : '' }}>
-                                        {{ $pay_slip->name }} </option>
-                                @endforeach
+                                        <option value=" {{ $pay_slip->id }}"
+                                            {{ isset($employee->pay_slip_id) ? ($employee->pay_slip_id == $pay_slip->id ? 'selected' : '') : '' }}>
+                                            {{ $pay_slip->name }} </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-lg-6 mb-3">
@@ -131,14 +145,15 @@
                                     <div class="header">
                                         <h2>Employee Current Image</h2>
                                         <img src="{{ asset($employee->image) }}" alt=""
-                                        style="height: 200px; width: 200px;" class="mb-3">
+                                            style="height: 200px; width: 200px;" class="mb-3">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6">
                                 <div class="card">
                                     <div class="body">
-                                        <input type="file" name="image" class="dropify" value="{{ isset($employee->image) ? $employee->image : '' }}">
+                                        <input type="file" name="image" class="dropify"
+                                            value="{{ isset($employee->image) ? $employee->image : '' }}">
                                     </div>
                                 </div>
                             </div>
@@ -151,12 +166,16 @@
                         <div class="col-md-9 mt-3">
                             <div class="form-group">
                                 <div class="radio inlineblock m-r-20">
-                                    <input type="radio" name="status" id="male" class="with-gap"  {{ isset($employee->status) && $employee->status == 1 ? 'checked' : '' }} checked value="option1">
-                                    <label for="male">Publish</label>
+                                    <input type="radio" name="status" id="publish" class="with-gap"
+                                        {{ isset($employee->status) && $employee->status == 1 ? 'checked' : '' }} checked
+                                        value="1">
+                                    <label for="publish">Publish</label>
                                 </div>
                                 <div class="radio inlineblock">
-                                    <input type="radio" name="status" {{ isset($employee->status) && $employee->status == 0 ? 'checked' : '' }} id="Female" class="with-gap" value="option2">
-                                    <label for="Female">Unpublish</label>
+                                    <input type="radio" name="status"
+                                        {{ isset($employee->status) && $employee->status == 0 ? 'checked' : '' }}
+                                        id="unublish" class="with-gap" value="0">
+                                    <label for="unublish">Unpublish</label>
                                 </div>
                             </div>
                         </div>

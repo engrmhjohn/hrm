@@ -41,6 +41,7 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Image</th>
+                                    <th>Location</th>
                                     <th>Department</th>
                                     <th>Designation</th>
                                     <th>Pay Slip</th>
@@ -55,15 +56,16 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td><img src="{{ asset($item->image) }}" alt="" style="width: 200px;"></td>
+                                        <td>{{ $item->location->name ?? ''}}</td>
                                         <td>{{ $item->department->name }}</td>
                                         <td>{{ $item->designation->name }}</td>
                                         <td>{{ $item->paySlip->name }}</td>
                                         <td>{{ $item->shift->name }}</td>
                                         <td>
                                             @if ($item->status == 1)
-                                                <a class="fw-bold">Published</a>
+                                                <a class="fw-bold">Running</a>
                                             @else
-                                                <a class="fw-bold">Unpublished</a>
+                                                <a class="fw-bold">Ex Employee</a>
                                             @endif
                                         </td>
                                         <td>
