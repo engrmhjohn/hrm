@@ -20,9 +20,21 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\UserInfoController;
 use Illuminate\Support\Facades\Auth;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+use App\Http\Controllers\Admin\PaymentController;
+
+// payment
+Route::get('/example1', [PaymentController::class, 'exampleEasyCheckout']);
+// Route::get('/example2', [PaymentController::class, 'exampleHostedCheckout']);
+
+// Route::post('/pay', [PaymentController::class, 'index']);
+Route::post('/pay-via-ajax', [PaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [PaymentController::class, 'success']);
+Route::post('/fail', [PaymentController::class, 'fail']);
+Route::post('/cancel', [PaymentController::class, 'cancel']);
+
+Route::post('/ipn', [PaymentController::class, 'ipn']);
+// payment
 
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index');
