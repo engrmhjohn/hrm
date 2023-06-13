@@ -28,6 +28,10 @@
     <link rel="stylesheet" href="{{ asset('adminAssets') }}/plugins/bootstrap-select/css/bootstrap-select.css" />
     {{-- calendar --}}
 
+    <!-- JQuery DataTable Css -->
+    <link rel="stylesheet" href="{{ asset('adminAssets') }}/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
+    <!-- JQuery DataTable Css -->
+
     <!-- Custom Css -->
     <link rel="stylesheet" href="{{ asset('adminAssets') }}/css/style.min.css">
     @yield('css')
@@ -112,6 +116,18 @@
     {{-- calendar --}}
     <script src="{{ asset('adminAssets') }}/bundles/fullcalendarscripts.bundle.js"></script>
     {{-- calendar --}}
+
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="{{ asset('adminAssets') }}/bundles/datatablescripts.bundle.js"></script>
+    <script src="{{ asset('adminAssets') }}/plugins/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
+    <script src="{{ asset('adminAssets') }}/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
+    <script src="{{ asset('adminAssets') }}/plugins/jquery-datatable/buttons/buttons.colVis.min.js"></script>
+    <script src="{{ asset('adminAssets') }}/plugins/jquery-datatable/buttons/buttons.flash.min.js"></script>
+    <script src="{{ asset('adminAssets') }}/plugins/jquery-datatable/buttons/buttons.html5.min.js"></script>
+    <script src="{{ asset('adminAssets') }}/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
+    <!-- Jquery DataTable Plugin Js -->
+
+    <script src="{{ asset('adminAssets') }}/js/pages/tables/jquery-datatable.js"></script>
 
     {{-- custom_js --}}
     <script src="{{ asset('adminAssets') }}/js/custom.js"></script>

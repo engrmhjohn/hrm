@@ -9,33 +9,16 @@
                 </div>
             </div>
         @endif
-
-
-        <div class="col-md-12">
+        <div class="col-lg-12">
             <div class="card">
-                <div class="card-header">
-                    Employee
-                </div>
-                <div class="card-body">
+                <div class="header">
                     <a href="{{ route('admin.employee') }}" class="btn btn-success btn-sm" title="Add New">
                         <i class="zmdi zmdi-plus" aria-hidden="true"></i> Add New
                     </a>
-                    <form method="GET" action="" accept-charset="UTF-8" class="form-inline" role="search"
-                        style="width: 25%;float: right;">
-                        <div class="search form-inline">
-                            <div class="input-group mb-0">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <div class="input-group-append">
-                                    <span class="input-group-text" id="basic-addon2"><i class="zmdi zmdi-search"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                    <br />
-                    <br />
+                </div>
+                <div class="body">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -50,13 +33,27 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Location</th>
+                                    <th>Department</th>
+                                    <th>Designation</th>
+                                    <th>Pay Slip</th>
+                                    <th>Shift</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </tfoot>
                             <tbody>
                                 @foreach ($employees as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td><img src="{{ asset($item->image) }}" alt="" style="width: 200px;"></td>
-                                        <td>{{ $item->location->name ?? ''}}</td>
+                                        <td>{{ $item->location->name ?? '' }}</td>
                                         <td>{{ $item->department->name }}</td>
                                         <td>{{ $item->designation->name }}</td>
                                         <td>{{ $item->paySlip->name }}</td>
@@ -87,10 +84,8 @@
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>
-
     </div>
 @endsection

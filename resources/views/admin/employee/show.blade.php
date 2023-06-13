@@ -63,7 +63,7 @@
                             </div>
                             <div class="col-lg-12 mb-3">
                                 <label>Department</label>
-                                <select name="department_id" id="" class="form-control show-tick ms search-select" data-placeholder="Select a Location">
+                                <select name="department_id" id="" class="form-control show-tick ms search-select" data-placeholder="Select a Department">
                                     <option value="" disabled selected></option>
                                     @foreach($departments as $department)
                                     <option value="{{$department->id}}">{{ $department->name }}</option>
