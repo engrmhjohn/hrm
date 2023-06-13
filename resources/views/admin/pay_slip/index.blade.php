@@ -58,7 +58,7 @@
                                         </td>
                                         <td>
                                             <a href="{{ route('admin.edit.pay_slip', $item->id) }}"
-                                                title="Edit Department"><button class="btn btn-primary btn-sm"><i
+                                                title="Edit Pay Slip"><button class="btn btn-primary btn-sm"><i
                                                         class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                     Edit</button></a>
 

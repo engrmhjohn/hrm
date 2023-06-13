@@ -67,7 +67,7 @@
                                         </td>
                                         <td>
                                             <a href="{{ route('admin.edit.employee', $item->id) }}"
-                                                title="Edit Department"><button class="btn btn-primary btn-sm"><i
+                                                title="Edit Employee"><button class="btn btn-primary btn-sm"><i
                                                         class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                     Edit</button></a>
 

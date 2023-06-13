@@ -71,10 +71,18 @@
             </li>
 
             <li><a href="javascript:void(0);" class="menu-toggle"><i
-                class="zmdi zmdi-assignment"></i></i> <span>Payroll Setting</span></a>
+                class="zmdi zmdi-settings"></i></i> <span>Payroll Setting</span></a>
                 <ul class="ml-menu">
                     <li><a href="{{ route('admin.manage.payroll.setting') }}">Employee Payroll Setting</a></li>
                     <li><a href="{{ route('admin.payroll.setting') }}">Add Employee Payroll Setting</a></li>
+                </ul>
+            </li>
+
+            <li><a href="javascript:void(0);" class="menu-toggle"><i
+                class="zmdi zmdi-settings"></i></i> <span>Attendance Setting</span></a>
+                <ul class="ml-menu">
+                    <li><a href="{{ route('admin.manage.attendance.setting') }}">Employee Attendance Setting</a></li>
+                    <li><a href="{{ route('admin.attendance.setting') }}">Add Employee Attendance Setting</a></li>
                 </ul>
             </li>
         </ul>

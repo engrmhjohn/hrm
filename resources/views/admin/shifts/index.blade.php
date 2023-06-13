@@ -64,7 +64,7 @@
                                         <td>{{ $item->friday_in_time }} To {{ $item->friday_out_time }}</td>
                                         <td>
                                             <a href="{{ route('admin.edit.shifts', $item->id) }}"
-                                                title="Edit Department"><button class="btn btn-primary btn-sm"><i
+                                                title="Edit Shift"><button class="btn btn-primary btn-sm"><i
                                                         class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                     Edit</button></a>
 

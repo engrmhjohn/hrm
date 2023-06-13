@@ -126,7 +126,6 @@
     <script src="{{ asset('adminAssets') }}/plugins/jquery-datatable/buttons/buttons.html5.min.js"></script>
     <script src="{{ asset('adminAssets') }}/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
     <!-- Jquery DataTable Plugin Js -->
-
     <script src="{{ asset('adminAssets') }}/js/pages/tables/jquery-datatable.js"></script>
 
     {{-- custom_js --}}

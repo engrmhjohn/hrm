@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AttendanceController;
 use App\Http\Controllers\Admin\CalendarController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\DesignationController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\UserInfoController;
 
 Route::get('/', function () {
@@ -121,6 +123,25 @@ Route::middleware('auth:admin')->name('admin.')->group(function () {
         Route::get('/edit-payroll-setting/{id}', 'editPayrollSetting')->name('edit.payroll.setting');
         Route::post('/update-payroll-setting', 'updatePayrollSetting')->name('update.payroll.setting');
         Route::post('/delete-payroll-setting', 'deletePayrollSetting')->name('delete.payroll.setting');
+    });
+
+    Route::controller(AttendanceController::class)->prefix('/admin')->group(function () {
+        Route::get('/attendance-setting', 'attendanceSetting')->name('attendance.setting');
+        Route::post('/save-attendance-setting', 'saveAttendanceSetting')->name('save.attendance.setting');
+        Route::get('/manage-attendance-setting', 'manageAttendanceSetting')->name('manage.attendance.setting');
+        Route::get('/edit-attendance-setting/{id}', 'editAttendanceSetting')->name('edit.attendance.setting');
+        Route::post('/update-attendance-setting', 'updateAttendanceSetting')->name('update.attendance.setting');
+        Route::post('/delete-attendance-setting', 'deleteAttendanceSetting')->name('delete.attendance.setting');
+    });
+
+    Route::controller(PackageController::class)->prefix('/admin')->group(function () {
+        Route::get('/package', 'package')->name('package');
+        Route::post('/save-package', 'savePackage')->name('save.package');
+        Route::get('/manage-package', 'managePackage')->name('manage.package');
+        Route::get('/edit-package/{id}', 'editPackage')->name('edit.package');
+        Route::post('/update-package', 'updatePackage')->name('update.package');
+        Route::post('/delete-package', 'deletePackage')->name('delete.package');
+
     });
 
 
