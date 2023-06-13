@@ -32,6 +32,10 @@
     <link rel="stylesheet" href="{{ asset('adminAssets') }}/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
     <!-- JQuery DataTable Css -->
 
+    {{-- summernote --}}
+    <link rel="stylesheet" href="{{ asset('adminAssets') }}/plugins/summernote/dist/summernote.css"/>
+    {{-- summernote --}}
+
     <!-- Custom Css -->
     <link rel="stylesheet" href="{{ asset('adminAssets') }}/css/style.min.css">
     @yield('css')
@@ -127,6 +131,10 @@
     <script src="{{ asset('adminAssets') }}/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
     <!-- Jquery DataTable Plugin Js -->
     <script src="{{ asset('adminAssets') }}/js/pages/tables/jquery-datatable.js"></script>
+
+    {{-- summernote --}}
+    <script src="{{ asset('adminAssets') }}/plugins/summernote/dist/summernote.js"></script>
+    {{-- summernote --}}
 
     {{-- custom_js --}}
     <script src="{{ asset('adminAssets') }}/js/custom.js"></script>

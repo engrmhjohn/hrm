@@ -12,13 +12,21 @@
                             alt="User"></a>
                     <div class="detail">
                         <h4>{{ Auth::user()->name }}</h4>
-                        <small>Super Admin</small>
+                        {{-- <small>Super Admin</small> --}}
                     </div>
                 </div>
             </li>
             <li class="active open"><a href="{{ url('/admin/dashboard') }}"><i
                         class="zmdi zmdi-home"></i><span>Dashboard</span></a>
             </li>
+            @if(Auth::user()->role==1)
+            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>Package</span></a>
+                <ul class="ml-menu">
+                    <li><a href="{{ route('admin.manage.package') }}">Package List</a></li>
+                    <li><a href="{{ route('admin.package') }}">Add New Package</a></li>
+                </ul>
+            </li>
+            @endif
 
             <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>Department</span></a>
                 <ul class="ml-menu">

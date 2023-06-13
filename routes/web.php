@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\AttendanceController;
 use App\Http\Controllers\Admin\CalendarController;
 use App\Http\Controllers\Admin\DepartmentController;
@@ -15,12 +16,17 @@ use App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\PackageController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\UserInfoController;
+use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::controller(FrontendController::class)->group(function () {
+    Route::get('/', 'index');
+ });
 
 Auth::routes();
 
@@ -32,7 +38,12 @@ Route::post('/admin/register', [RegisterController::class, 'createAdmin'])->name
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/admin/dashboard', function () {
-    return view('backend.home.index');
+    $role=Auth::user()->role;
+    if($role=='1'){
+        return view('backend.home.index');
+    }else{
+        return view('backend.home.index');
+    }
 })->middleware('auth:admin');
 
 Route::get('/admin/create-user', [AdminController::class, 'user']);
