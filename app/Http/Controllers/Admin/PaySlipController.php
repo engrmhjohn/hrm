@@ -13,6 +13,7 @@ class PaySlipController extends Controller
     }
     public function savePaySlip(Request $request){
        $pay_slip = new PaySlip();
+       $pay_slip->admin_id = $request->admin_id;
        $pay_slip->name = $request->name;
        $pay_slip->status = $request->status;
 
@@ -20,8 +21,13 @@ class PaySlipController extends Controller
        return redirect(route('admin.manage.pay_slip'))->with('message','Successfully Added!');
     }
     public function managePaySlip() {
+        $userId = auth()->user()->id;
+        $pay_slips = PaySlip::where('status', '1')
+        ->where('admin_id', $userId)
+        ->get();
+
         return view('admin.pay_slip.index', [
-            'pay_slips' => PaySlip::all(),
+            'pay_slips' => $pay_slips,
         ]);
     }
 
@@ -35,6 +41,7 @@ class PaySlipController extends Controller
 
     public function updatePaySlip(Request $request) {
         $pay_slip               = PaySlip::find($request->pay_slip_id);
+        $pay_slip->admin_id = $request->admin_id;
         $pay_slip->name = $request->name;
         $pay_slip->status = $request->status;
 

@@ -236,7 +236,6 @@ class PaymentController extends Controller
 
 
                 echo "<br >Transaction is successfully Completed";
-                return redirect('/');
             }
         } else if ($order_details->status == 'Processing' || $order_details->status == 'Complete') {
             /*
@@ -262,7 +261,6 @@ class PaymentController extends Controller
             Here you can also sent sms or email for successfull transaction to customer
             */
                 echo "<br >Transaction is successfully Completed";
-                return url('/admin/dashboard');
             }
         } else if ($order_info && ($order_info->status == 'Processing' || $order_info->status == 'Complete')) {
             /*
@@ -273,6 +271,7 @@ class PaymentController extends Controller
             #That means something wrong happened. You can redirect customer to your product page.
             echo "Invalid Transaction";
         }
+        return redirect(url('/admin/dashboard'));
     }
 
     public function fail(Request $request)

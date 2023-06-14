@@ -11,6 +11,7 @@
                     <form action="{{route('admin.update.pay_slip')}}" method="post">
                         @csrf
                         <input type="hidden" name="pay_slip_id" value="{{$pay_slip->id}}">
+                        <input type="hidden" name="admin_id" value="{{Auth::user()->id}}">
                         <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
                             <label for="name" class="control-label">{{ 'Name' }}</label>
                             <input class="form-control" name="name" type="text" id="name" value="{{ isset($pay_slip->name) ? $pay_slip->name : ''}}" >
@@ -21,11 +22,11 @@
                         </div>
                         <div class="col-md-9 mt-3">
                             <div class="radio inlineblock m-r-20">
-                                <input type="radio" name="status" id="male" class="with-gap" {{ ( isset($pay_slip->status) && $pay_slip->status == 1) ? 'checked': ''}} checked value="option1">
+                                <input type="radio" name="status" id="male" class="with-gap" {{ ( isset($pay_slip->status) && $pay_slip->status == 1) ? 'checked': ''}} checked value="1">
                                 <label for="male">Publish</label>
                             </div>
                             <div class="radio inlineblock">
-                                <input type="radio" name="status" {{ ( isset($pay_slip->status) && $pay_slip->status == 0) ? 'checked': ''}} id="Female" class="with-gap" value="option2">
+                                <input type="radio" name="status" {{ ( isset($pay_slip->status) && $pay_slip->status == 0) ? 'checked': ''}} id="Female" class="with-gap" value="0">
                                 <label for="Female">Unpublish</label>
                             </div>
                         </div>

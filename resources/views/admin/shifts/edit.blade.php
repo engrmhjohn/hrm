@@ -11,6 +11,7 @@
                     <form action="{{route('admin.update.shifts')}}" method="post">
                         @csrf
                         <input type="hidden" name="shift_id" value="{{$shift->id}}">
+                        <input type="hidden" name="admin_id" value="{{Auth::user()->id}}">
                         <div class="row">
                             <div class="col-lg-12 mb-3">
                                 <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">

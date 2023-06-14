@@ -13,14 +13,19 @@ class DesignationController extends Controller
     }
     public function saveDesignation(Request $request){
        $designation = new Designation();
+       $designation->admin_id = $request->admin_id;
        $designation->name = $request->name;
        $designation->status = $request->status;
        $designation->save();
        return redirect(route('admin.manage.designation'))->with('message','Successfully Added!');
     }
     public function manageDesignation() {
+        $userId = auth()->user()->id;
+        $total_designation = Designation::where('status', '1')
+        ->where('admin_id', $userId)
+        ->get();
         return view('admin.designation.index', [
-            'designations' => Designation::all(),
+            'designations' => $total_designation
         ]);
     }
 
@@ -34,6 +39,7 @@ class DesignationController extends Controller
 
     public function updateDesignation(Request $request) {
         $designation               = Designation::find($request->designation_id);
+        $designation->admin_id = $request->admin_id;
         $designation->name = $request->name;
         $designation->status = $request->status;
 

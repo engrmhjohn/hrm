@@ -20,8 +20,12 @@ class DepartmentController extends Controller
        return redirect(route('admin.manage.department'))->with('message','Successfully Added!');
     }
     public function manageDepartment() {
+        $userId = auth()->user()->id;
+        $total_department = Department::where('status', '1')
+        ->where('admin_id', $userId)
+        ->get();
         return view('admin.department.index', [
-            'departments' => Department::all(),
+            'total_department' => $total_department
         ]);
     }
 

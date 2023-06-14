@@ -11,6 +11,7 @@
                     <form action="{{route('admin.update.department')}}" method="post">
                         @csrf
                         <input type="hidden" name="department_id" value="{{$department->id}}">
+                        <input type="hidden" name="admin_id" value="{{Auth::user()->id}}">
                         <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
                             <label for="name" class="control-label">{{ 'Name' }}</label>
                             <input class="form-control" name="name" type="text" id="name" value="{{ isset($department->name) ? $department->name : ''}}" >
@@ -22,11 +23,11 @@
                         <div class="col-md-9 mt-3">
                             <div class="form-group">
                                 <div class="radio inlineblock m-r-20">
-                                    <input type="radio" name="status" id="male" class="with-gap" {{ ( isset($department->status) && $department->status == 1) ? 'checked': ''}} checked value="option1">
+                                    <input type="radio" name="status" id="male" class="with-gap" {{ ( isset($department->status) && $department->status == 1) ? 'checked': ''}} checked value="1">
                                     <label for="male">Publish</label>
                                 </div>
                                 <div class="radio inlineblock">
-                                    <input type="radio" name="status" {{ ( isset($department->status) && $department->status == 0) ? 'checked': ''}} id="Female" class="with-gap" value="option2">
+                                    <input type="radio" name="status" {{ ( isset($department->status) && $department->status == 0) ? 'checked': ''}} id="Female" class="with-gap" value="0">
                                     <label for="Female">Unpublish</label>
                                 </div>
                             </div>

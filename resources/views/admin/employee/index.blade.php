@@ -10,6 +10,9 @@
             </div>
         @endif
         <div class="col-lg-12">
+            <div class="card-header">
+                Manage Employee
+            </div>
             <div class="card">
                 <div class="header">
                     <a href="{{ route('admin.employee') }}" class="btn btn-success btn-sm" title="Add New">
@@ -33,7 +36,7 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tfoot>
+                            {{-- <tfoot>
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
@@ -46,7 +49,7 @@
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
-                            </tfoot>
+                            </tfoot> --}}
                             <tbody>
                                 @foreach ($employees as $item)
                                     <tr>

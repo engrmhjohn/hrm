@@ -33,6 +33,7 @@ class EmployeeController extends Controller
     public function saveEmployee(Request $request)
     {
         $employee = new Employee();
+        $employee->admin_id = $request->admin_id;
         $employee->name = $request->name;
         $employee->email = $request->email;
         $employee->contact_number = $request->contact_number;
@@ -52,8 +53,12 @@ class EmployeeController extends Controller
     }
     public function manageEmployee()
     {
+        $userId = auth()->user()->id;
+        $employees = Employee::where('status', '1')
+        ->where('admin_id', $userId)
+        ->get();
         return view('admin.employee.index', [
-            'employees' => Employee::all(),
+            'employees' => $employees,
         ]);
     }
 
@@ -74,6 +79,7 @@ class EmployeeController extends Controller
     public function updateEmployee(Request $request)
     {
         $employee               = Employee::find($request->employee_id);
+        $employee->admin_id = $request->admin_id;
         $employee->name = $request->name;
         $employee->email = $request->email;
         $employee->contact_number = $request->contact_number;

@@ -13,6 +13,7 @@ class ShiftsController extends Controller
     }
     public function saveShift(Request $request){
        $shift = new Shift();
+       $shift->admin_id = $request->admin_id;
        $shift->name = $request->name;
        $shift->saturday_in_time = $request->saturday_in_time;
        $shift->saturday_out_time = $request->saturday_out_time;
@@ -32,8 +33,11 @@ class ShiftsController extends Controller
        return redirect(route('admin.manage.shifts'))->with('message','Successfully Added!');
     }
     public function manageShift() {
+        $userId = auth()->user()->id;
+        $total_shift = Shift::where('admin_id', $userId)
+        ->get();
         return view('admin.shifts.index', [
-            'shifts' => Shift::all(),
+            'total_shift' => $total_shift
         ]);
     }
 
@@ -47,6 +51,7 @@ class ShiftsController extends Controller
 
     public function updateShift(Request $request) {
         $shift               = Shift::find($request->shift_id);
+        $shift->admin_id = $request->admin_id;
         $shift->name = $request->name;
         $shift->saturday_in_time = $request->saturday_in_time;
         $shift->saturday_out_time = $request->saturday_out_time;
