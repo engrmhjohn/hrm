@@ -18,7 +18,10 @@
                             alt="User"></a>
                     <div class="detail">
                         <h4>{{ Auth::user()->name }}</h4>
-                        {{-- <small>Super Admin</small> --}}
+                        @php
+                            $role = Auth::user()->role;
+                        @endphp
+                        {{ $role == '1' ? 'Super Admin' : 'Admin' }}
                     </div>
                 </div>
             </li>
@@ -108,6 +111,8 @@
                         <li><a href="{{ route('admin.attendance.setting') }}">Add Employee Attendance Setting</a></li>
                     </ul>
                 </li>
+            @else
+            <a class="btn btn-outline-success text-white" href="{{url('/')}}">Buy Plan to Access More</a>
             @endif
         </ul>
     </div>

@@ -262,7 +262,7 @@ class PaymentController extends Controller
             Here you can also sent sms or email for successfull transaction to customer
             */
                 echo "<br >Transaction is successfully Completed";
-                return redirect(url('/admin/dashboard'));
+                return url('/admin/dashboard');
             }
         } else if ($order_info && ($order_info->status == 'Processing' || $order_info->status == 'Complete')) {
             /*
