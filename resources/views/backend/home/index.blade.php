@@ -2,19 +2,31 @@
 @section('content')
     <div class="row clearfix">
         @php
-            $total_employee = App\Models\Employee::where('status', '1')->get();
+            $userId = auth()->user()->id; // Get the ID of the logged-in user
+            $total_employee = App\Models\Employee::where('status', '1')
+                ->where('admin_id', $userId)
+                ->get();
             $employee_count = $total_employee->count();
         @endphp
         @php
-            $total_department = App\Models\Department::where('status', '1')->get();
+            $userId = auth()->user()->id; // Get the ID of the logged-in user
+            $total_department = App\Models\Department::where('status', '1')
+                ->where('admin_id', $userId)
+                ->get();
             $department_count = $total_department->count();
         @endphp
+
         @php
-            $total_designation = App\Models\Designation::where('status', '1')->get();
+            $userId = auth()->user()->id; // Get the ID of the logged-in user
+            $total_designation = App\Models\Designation::where('status', '1')
+                ->where('admin_id', $userId)
+                ->get();
             $designation_count = $total_designation->count();
         @endphp
         @php
-            $total_shift = App\Models\Shift::get();
+
+            $userId = auth()->user()->id; // Get the ID of the logged-in user
+            $total_shift = App\Models\Shift::where('admin_id', $userId)->get();
             $shift_count = $total_shift->count();
         @endphp
         <div class="col-lg-3 col-md-6 col-sm-12">
@@ -22,10 +34,19 @@
                 <div class="body">
                     <h6>Total Employee</h6>
                     <h2> {{ $employee_count }} </h2>
-                    <small>2% higher than last month</small>
+                    @php
+                        $max_count = 10; // Set the maximum count value for 100% width of the progress bar
+                    @endphp
+                      <small>Total Registered Employee</small>
                     <div class="progress">
-                        <div class="progress-bar l-amber" role="progressbar" aria-valuenow="45" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 45%;"></div>
+                        @if ($employee_count > 0)
+                            <div class="progress-bar l-green" role="progressbar" aria-valuenow="{{ $employee_count }}"
+                                aria-valuemin="0" aria-valuemax="100"
+                                style="width: {{ ($employee_count / $max_count) * 100 }}%;"></div>
+                        @else
+                            <div class="progress-bar l-green" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                aria-valuemax="100" style="width: 0%;"></div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -35,10 +56,19 @@
                 <div class="body">
                     <h6>Total Department</h6>
                     <h2> {{ $department_count }} </h2>
-                    <small>6% higher than last month</small>
+                    @php
+                        $max_count = 10; // Set the maximum count value for 100% width of the progress bar
+                    @endphp
+                      <small>Total Registered Department</small>
                     <div class="progress">
-                        <div class="progress-bar l-blue" role="progressbar" aria-valuenow="38" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 38%;"></div>
+                        @if ($department_count > 0)
+                            <div class="progress-bar l-green" role="progressbar" aria-valuenow="{{ $department_count }}"
+                                aria-valuemin="0" aria-valuemax="100"
+                                style="width: {{ ($department_count / $max_count) * 100 }}%;"></div>
+                        @else
+                            <div class="progress-bar l-green" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                aria-valuemax="100" style="width: 0%;"></div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -48,10 +78,19 @@
                 <div class="body">
                     <h6>Total Designation</h6>
                     <h2> {{ $designation_count }} </h2>
-                    <small>Total Registered email</small>
+                    @php
+                        $max_count = 10; // Set the maximum count value for 100% width of the progress bar
+                    @endphp
+                      <small>Total Registered Designation</small>
                     <div class="progress">
-                        <div class="progress-bar l-purple" role="progressbar" aria-valuenow="39" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 39%;"></div>
+                        @if ($designation_count > 0)
+                            <div class="progress-bar l-green" role="progressbar" aria-valuenow="{{ $designation_count }}"
+                                aria-valuemin="0" aria-valuemax="100"
+                                style="width: {{ ($designation_count / $max_count) * 100 }}%;"></div>
+                        @else
+                            <div class="progress-bar l-green" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                aria-valuemax="100" style="width: 0%;"></div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -61,16 +100,25 @@
                 <div class="body">
                     <h6>Total Shift</h6>
                     <h2> {{ $shift_count }} </h2>
-                    <small>Total Registered Domain</small>
+                    @php
+                        $max_count = 10; // Set the maximum count value for 100% width of the progress bar
+                    @endphp
+                    <small>Total Registered Shifts</small>
                     <div class="progress">
-                        <div class="progress-bar l-green" role="progressbar" aria-valuenow="89" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 89%;"></div>
+                        @if ($shift_count > 0)
+                            <div class="progress-bar l-green" role="progressbar" aria-valuenow="{{ $shift_count }}"
+                                aria-valuemin="0" aria-valuemax="100"
+                                style="width: {{ ($shift_count / $max_count) * 100 }}%;"></div>
+                        @else
+                            <div class="progress-bar l-green" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                aria-valuemax="100" style="width: 0%;"></div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row clearfix">
+    {{-- <div class="row clearfix">
         <div class="col-lg-12">
             <div class="card">
                 <div class="header">
@@ -380,5 +428,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

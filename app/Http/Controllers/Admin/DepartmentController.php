@@ -13,6 +13,7 @@ class DepartmentController extends Controller
     }
     public function saveDepartment(Request $request){
        $department = new Department();
+       $department->admin_id = $request->admin_id;
        $department->name = $request->name;
        $department->status = $request->status;
        $department->save();
@@ -34,6 +35,7 @@ class DepartmentController extends Controller
 
     public function updateDepartment(Request $request) {
         $department               = Department::find($request->department_id);
+        $department->admin_id = $request->admin_id;
         $department->name = $request->name;
         $department->status = $request->status;
 

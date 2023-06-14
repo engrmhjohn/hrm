@@ -6,6 +6,7 @@ use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use App\Models\OrderInfo;
 
 class PackageController extends Controller
 {
@@ -58,5 +59,18 @@ class PackageController extends Controller
         $package->delete();
 
         return redirect(route('admin.manage.package'))->with('message','Successfully Deleted!');
+    }
+
+    public function soldPackage(){
+        return view('admin.package.sold_package',[
+            'sold_items' => OrderInfo::all()
+        ]);
+    }
+
+    public function deleteSoldPackage(Request $request) {
+        $sold_item = OrderInfo::find($request->sold_item_id);
+        $sold_item->delete();
+
+        return redirect(route('admin.sold.package'))->with('message','Successfully Deleted!');
     }
 }
