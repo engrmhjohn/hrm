@@ -7,15 +7,16 @@ use Illuminate\Http\Request;
 use DB;
 use App\Library\SslCommerz\SslCommerzNotification;
 use App\Models\Package;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+use App\Models\OrderInfo;
+
 
 class PaymentController extends Controller
 {
 
-    public function buyNow($id){
+    public function buyNow($id)
+    {
         $package = Package::find($id);
-        return view('admin.checkout.exampleEasycheckout',[
+        return view('admin.checkout.exampleEasycheckout', [
             'package' => $package
         ]);
     }
@@ -93,6 +94,25 @@ class PaymentController extends Controller
                 'transaction_id' => $post_data['tran_id'],
                 'currency' => $post_data['currency']
             ]);
+
+        // Save the order information into the "order_info" table
+        $orderInfo = OrderInfo::updateOrInsert(
+            [
+                'transaction_id' => $post_data['tran_id']
+            ],
+            [
+                'name' => $post_data['name'],
+                'email' => $post_data['cus_email'],
+                'phone' => $post_data['cus_phone'],
+                'customer_id' => $post_data['customer_id'],
+                'package_id' => $post_data['package_id'],
+                'amount' => $post_data['total_amount'],
+                'status' => 'Pending',
+                'address' => $post_data['cus_add1'],
+                'currency' => $post_data['currency']
+            ]
+        );
+
 
         $sslc = new SslCommerzNotification();
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
@@ -180,7 +200,6 @@ class PaymentController extends Controller
             print_r($payment_options);
             $payment_options = array();
         }
-
     }
 
     public function success(Request $request)
@@ -209,7 +228,12 @@ class PaymentController extends Controller
                 */
                 $update_product = DB::table('orders')
                     ->where('transaction_id', $tran_id)
-                    ->update(['status' => 'Completed']);
+                    ->update(['status' => 'Paid']);
+
+                $update_order_info = DB::table('order_infos')
+                    ->where('transaction_id', $tran_id)
+                    ->update(['status' => 'Paid']);
+
 
                 echo "<br >Transaction is successfully Completed";
                 return redirect('/');
@@ -224,7 +248,31 @@ class PaymentController extends Controller
             echo "Invalid Transaction";
         }
 
+        $order_info = DB::table('order_infos')
+            ->where('transaction_id', $tran_id)
+            ->select('transaction_id', 'status', 'currency', 'amount')->first();
 
+            if ($order_info && $order_info->status == 'Pending') {
+            $validation = $sslc->orderValidate($request->all(), $tran_id, $amount, $currency);
+
+            if ($validation) {
+                /*
+            That means IPN did not work or IPN URL was not set in your merchant panel. Here you need to update order status
+            in order table as Processing or Complete.
+            Here you can also sent sms or email for successfull transaction to customer
+            */
+                echo "<br >Transaction is successfully Completed";
+                return redirect(route('/'));
+            }
+        } else if ($order_info && ($order_info->status == 'Processing' || $order_info->status == 'Complete')) {
+            /*
+         That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to udate database.
+         */
+            echo "Transaction is successfully Completed";
+        } else {
+            #That means something wrong happened. You can redirect customer to your product page.
+            echo "Invalid Transaction";
+        }
     }
 
     public function fail(Request $request)
@@ -245,7 +293,6 @@ class PaymentController extends Controller
         } else {
             echo "Transaction is Invalid";
         }
-
     }
 
     public function cancel(Request $request)
@@ -266,8 +313,6 @@ class PaymentController extends Controller
         } else {
             echo "Transaction is Invalid";
         }
-
-
     }
 
     public function ipn(Request $request)
@@ -312,5 +357,4 @@ class PaymentController extends Controller
             echo "Invalid Data";
         }
     }
-
 }

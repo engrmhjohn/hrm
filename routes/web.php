@@ -173,5 +173,6 @@ Route::middleware('auth:admin')->name('admin.')->group(function () {
         Route::get('/edit-package/{id}', 'editPackage')->name('edit.package');
         Route::post('/update-package', 'updatePackage')->name('update.package');
         Route::post('/delete-package', 'deletePackage')->name('delete.package');
+        Route::get('/sold-package', 'soldPackage')->name('sold.package');
     });
 });
