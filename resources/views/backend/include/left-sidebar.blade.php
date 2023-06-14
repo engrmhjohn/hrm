@@ -24,6 +24,7 @@
                 <ul class="ml-menu">
                     <li><a href="{{ route('admin.manage.package') }}">Package List</a></li>
                     <li><a href="{{ route('admin.package') }}">Add New Package</a></li>
+                    <li><a href="{{ route('admin.package') }}">Sold Packages</a></li>
                 </ul>
             </li>
             @endif

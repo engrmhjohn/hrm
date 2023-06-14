@@ -3,7 +3,7 @@
     Human Resource Management
 @endsection
 @section('content')
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-lg-12">
             @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
@@ -30,8 +30,8 @@
                 </div>
             @endif
         </div>
+        @foreach ($packages as $item)
         <div class="col-lg-3 mt-3 mb-3">
-            @foreach ($packages as $item)
             <div class="card">
                 <div class="card-header text-center">
                     <h4>Plan Type: {{$item->name}}</h4>
@@ -42,11 +42,11 @@
                     <h4>Price: {{$item->price}} BDT</h4>
                 </div>
                 <div class="card-footer text-center">
-                    <a class="btn btn-warning form-control" href="#">Buy Now</a>
+                    <a class="btn btn-warning form-control" href="{{route('package.buy.now', $item->id)}}">Buy Now</a>
                 </div>
             </div>
 
-            @endforeach
         </div>
+        @endforeach
     </div>
 @endsection

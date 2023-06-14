@@ -6,34 +6,48 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use App\Library\SslCommerz\SslCommerzNotification;
+use App\Models\Package;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class PaymentController extends Controller
 {
 
+    public function buyNow($id){
+        $package = Package::find($id);
+        return view('admin.checkout.exampleEasycheckout',[
+            'package' => $package
+        ]);
+    }
+
     public function exampleEasyCheckout()
     {
-        return view('exampleEasycheckout');
+        return view('admin.checkout.exampleEasycheckout');
     }
 
     public function exampleHostedCheckout()
     {
-        return view('exampleHosted');
+        return view('admin.checkout.exampleEasycheckout');
     }
 
     public function index(Request $request)
+
     {
         # Here you have to receive all the order data to initate the payment.
         # Let's say, your oder transaction informations are saving in a table called "orders"
         # In "orders" table, order unique identity is "transaction_id". "status" field contain status of the transaction, "amount" is the order amount to be paid and "currency" is for storing Site Currency which will be checked with paid currency.
-
+        // $requestData = (array)json_decode($request->cart_json);
         $post_data = array();
-        $post_data['total_amount'] = '10'; # You cant not pay less than 10
+
+        $post_data['package_id'] = $request->input('package_id');
+        $post_data['customer_id'] = $request->input('customer_id');
+        $post_data['total_amount'] = $request->input('amount'); # You cant not pay less than 10
         $post_data['currency'] = "BDT";
         $post_data['tran_id'] = uniqid(); // tran_id must be unique
 
         # CUSTOMER INFORMATION
-        $post_data['cus_name'] = 'Customer Name';
-        $post_data['cus_email'] = 'customer@mail.com';
+        $post_data['name'] = $request->input('name');
+        $post_data['cus_email'] = $request->input('email');
         $post_data['cus_add1'] = 'Customer Address';
         $post_data['cus_add2'] = "";
         $post_data['cus_city'] = "";
@@ -68,9 +82,11 @@ class PaymentController extends Controller
         $update_product = DB::table('orders')
             ->where('transaction_id', $post_data['tran_id'])
             ->updateOrInsert([
-                'name' => $post_data['cus_name'],
+                'name' => $post_data['name'],
                 'email' => $post_data['cus_email'],
                 'phone' => $post_data['cus_phone'],
+                'customer_id' => $post_data['customer_id'],
+                'package_id' => $post_data['package_id'],
                 'amount' => $post_data['total_amount'],
                 'status' => 'Pending',
                 'address' => $post_data['cus_add1'],
@@ -86,24 +102,29 @@ class PaymentController extends Controller
             print_r($payment_options);
             $payment_options = array();
         }
-
     }
 
     public function payViaAjax(Request $request)
     {
+        // return $request->all();
 
         # Here you have to receive all the order data to initate the payment.
         # Lets your oder trnsaction informations are saving in a table called "orders"
         # In orders table order uniq identity is "transaction_id","status" field contain status of the transaction, "amount" is the order amount to be paid and "currency" is for storing Site Currency which will be checked with paid currency.
-
+        $requestData = (array)json_decode($request->cart_json);
         $post_data = array();
-        $post_data['total_amount'] = '10'; # You cant not pay less than 10
+
+        //obj = $requestData & id = $post_data
+
+        // $post_data['package_id'] = $requestData['package_id'];
+        // $post_data['customer_id'] = $requestData['customer_id'];
+        $post_data['amount'] = $requestData['amount']; # You cant not pay less than 10
         $post_data['currency'] = "BDT";
         $post_data['tran_id'] = uniqid(); // tran_id must be unique
 
         # CUSTOMER INFORMATION
-        $post_data['cus_name'] = 'Customer Name';
-        $post_data['cus_email'] = 'customer@mail.com';
+        $post_data['name'] = $requestData['name'];
+        $post_data['email'] = $requestData['email'];
         $post_data['cus_add1'] = 'Customer Address';
         $post_data['cus_add2'] = "";
         $post_data['cus_city'] = "";
@@ -139,10 +160,12 @@ class PaymentController extends Controller
         $update_product = DB::table('orders')
             ->where('transaction_id', $post_data['tran_id'])
             ->updateOrInsert([
-                'name' => $post_data['cus_name'],
-                'email' => $post_data['cus_email'],
+                'name' => $post_data['name'],
+                'email' => $post_data['email'],
                 'phone' => $post_data['cus_phone'],
-                'amount' => $post_data['total_amount'],
+                'amount' => $post_data['amount'],
+                // 'customer_id' => $post_data['customer_id'],
+                // 'package_id' => $post_data['package_id'],
                 'status' => 'Pending',
                 'address' => $post_data['cus_add1'],
                 'transaction_id' => $post_data['tran_id'],
@@ -189,6 +212,7 @@ class PaymentController extends Controller
                     ->update(['status' => 'Completed']);
 
                 echo "<br >Transaction is successfully Completed";
+                return redirect('/');
             }
         } else if ($order_details->status == 'Processing' || $order_details->status == 'Complete') {
             /*

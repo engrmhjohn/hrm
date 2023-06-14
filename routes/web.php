@@ -22,23 +22,32 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Admin\PaymentController;
 
-// payment
-Route::get('/example1', [PaymentController::class, 'exampleEasyCheckout']);
-// Route::get('/example2', [PaymentController::class, 'exampleHostedCheckout']);
+Route::controller(PaymentController::class)->group(function () {
 
-// Route::post('/pay', [PaymentController::class, 'index']);
-Route::post('/pay-via-ajax', [PaymentController::class, 'payViaAjax']);
+    // payment
+    Route::get('/example1', 'exampleEasyCheckout');
+    // Route::get('/example2', 'exampleHostedCheckout');
 
-Route::post('/success', [PaymentController::class, 'success']);
-Route::post('/fail', [PaymentController::class, 'fail']);
-Route::post('/cancel', [PaymentController::class, 'cancel']);
+    Route::post('/pay', 'index');
+    Route::post('/pay-via-ajax', 'payViaAjax');
 
-Route::post('/ipn', [PaymentController::class, 'ipn']);
-// payment
+    Route::post('/success', 'success');
+    Route::post('/fail', 'fail');
+    Route::post('/cancel', 'cancel');
+
+    Route::post('/ipn', 'ipn');
+    // payment
+
+
+    //buy now
+    Route::get('/buy-now/{id}', 'buyNow')->name('package.buy.now')->middleware('auth:admin');
+
+});
+
 
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index');
- });
+});
 
 Auth::routes();
 
@@ -50,10 +59,10 @@ Route::post('/admin/register', [RegisterController::class, 'createAdmin'])->name
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/admin/dashboard', function () {
-    $role=Auth::user()->role;
-    if($role=='1'){
+    $role = Auth::user()->role;
+    if ($role == '1') {
         return view('backend.home.index');
-    }else{
+    } else {
         return view('backend.home.index');
     }
 })->middleware('auth:admin');
@@ -164,8 +173,5 @@ Route::middleware('auth:admin')->name('admin.')->group(function () {
         Route::get('/edit-package/{id}', 'editPackage')->name('edit.package');
         Route::post('/update-package', 'updatePackage')->name('update.package');
         Route::post('/delete-package', 'deletePackage')->name('delete.package');
-
     });
-
-
 });
