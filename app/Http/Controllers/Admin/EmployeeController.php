@@ -21,12 +21,27 @@ class EmployeeController extends Controller
 {
     public function employee()
     {
+        $userId = auth()->user()->id;
+        $departments = Department::where('admin_id', $userId)->where('status', 1)->get();
+
+        $userId = auth()->user()->id;
+        $locations = Location::where('admin_id', $userId)->get();
+
+        $userId = auth()->user()->id;
+        $designations = Designation::where('admin_id', $userId)->where('status', 1)->get();
+
+        $userId = auth()->user()->id;
+        $shifts = Shift::where('admin_id', $userId)->get();
+
+        $userId = auth()->user()->id;
+        $pay_slips = PaySlip::where('admin_id', $userId)->where('status', 1)->get();
+
         return view('admin.employee.show', [
-            'departments' => Department::all(),
-            'locations' => Location::all(),
-            'designations' => Designation::all(),
-            'shifts' => Shift::all(),
-            'pay_slips' => PaySlip::all(),
+            'departments' => $departments,
+            'locations' => $locations,
+            'designations' => $designations,
+            'shifts' => $shifts,
+            'pay_slips' => $pay_slips,
         ]);
     }
 
@@ -55,8 +70,8 @@ class EmployeeController extends Controller
     {
         $userId = auth()->user()->id;
         $employees = Employee::where('status', '1')
-        ->where('admin_id', $userId)
-        ->get();
+            ->where('admin_id', $userId)
+            ->get();
         return view('admin.employee.index', [
             'employees' => $employees,
         ]);
@@ -66,13 +81,28 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($id);
 
+        $userId = auth()->user()->id;
+        $departments = Department::where('admin_id', $userId)->where('status', 1)->get();
+
+        $userId = auth()->user()->id;
+        $locations = Location::where('admin_id', $userId)->get();
+
+        $userId = auth()->user()->id;
+        $designations = Designation::where('admin_id', $userId)->where('status', 1)->get();
+
+        $userId = auth()->user()->id;
+        $shifts = Shift::where('admin_id', $userId)->get();
+
+        $userId = auth()->user()->id;
+        $pay_slips = PaySlip::where('admin_id', $userId)->where('status', 1)->get();
+
         return view('admin.employee.edit', [
             'employee' => $employee,
-            'locations' => Location::all(),
-            'departments' => Department::all(),
-            'designations' => Designation::all(),
-            'shifts' => Shift::all(),
-            'pay_slips' => PaySlip::all(),
+            'departments' => $departments,
+            'locations' => $locations,
+            'designations' => $designations,
+            'shifts' => $shifts,
+            'pay_slips' => $pay_slips,
         ]);
     }
 
@@ -116,7 +146,8 @@ class EmployeeController extends Controller
         return redirect(route('admin.manage.employee'))->with('message', 'Successfully Deleted!');
     }
 
-    public function test(){
+    public function test()
+    {
         return view('admin.test.test');
     }
 }

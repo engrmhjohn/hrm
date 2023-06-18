@@ -19,6 +19,7 @@ class MapController extends Controller
     {
         $url = $request->input('url');
         $name = $request->input('name');
+        $admin_id = $request->input('admin_id');
 
         if (empty($url)) {
             return redirect(route('admin.manage.location'))->with('message', 'Invalid/Empty Link!');
@@ -47,6 +48,7 @@ class MapController extends Controller
                 $location->latitude = $latitude;
                 $location->longitude = $longitude;
                 $location->name = $name;
+                $location->admin_id = $admin_id;
                 $location->save();
 
                 // Pass the latitude and longitude values to the view
@@ -60,8 +62,11 @@ class MapController extends Controller
         }
     }
     public function manageLocation() {
+        $userId = auth()->user()->id;
+        $locations = Location::where('admin_id', $userId)
+        ->get();
         return view('admin.map_coordinator.index', [
-            'locations' => Location::all(),
+            'locations' => $locations,
         ]);
     }
 
@@ -76,6 +81,7 @@ class MapController extends Controller
         $location = Location::findOrFail($id);
         $url = $request->input('url');
         $name = $request->input('name');
+        $admin_id = $request->input('admin_id');
 
         if (empty($url)) {
             return redirect(route('admin.manage.location'))->with('message', 'Invalid/Empty Link!');
@@ -98,6 +104,7 @@ class MapController extends Controller
                 $location->latitude = $latitude;
                 $location->longitude = $longitude;
                 $location->name = $name;
+                $location->admin_id = $admin_id;
                 $location->save();
 
                 return redirect(route('admin.manage.location'))->with('message', 'Successfully updated!');
@@ -115,6 +122,4 @@ class MapController extends Controller
 
         return redirect(route('admin.manage.location'))->with('message', 'Successfully Deleted!');
     }
-
-    // ...
 }

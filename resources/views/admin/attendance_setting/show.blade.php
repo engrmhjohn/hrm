@@ -12,6 +12,7 @@
                     <br />
                     <form action="{{ route('admin.save.attendance.setting') }}" method="post">
                         @csrf
+                        <input type="hidden" name="admin_id" value="{{Auth::user()->id}}">
                         <div class="row">
 
                             <div class="col-lg-6 mb-3">

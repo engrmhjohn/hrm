@@ -21,6 +21,7 @@ class PayrollSettingController extends Controller
     {
         $payroll_setting = new PayrollSetting();
         $payroll_setting->payroll_type = $request->payroll_type;
+        $payroll_setting->admin_id = $request->admin_id;
         $payroll_setting->employee_id = $request->employee_id;
         $payroll_setting->department_id = $request->department_id;
         $payroll_setting->late_in_cut = $request->late_in_cut;
@@ -35,8 +36,11 @@ class PayrollSettingController extends Controller
     }
     public function managePayrollSetting()
     {
+        $userId = auth()->user()->id;
+        $payroll_settings = PayrollSetting::where('admin_id', $userId)
+        ->get();
         return view('admin.payroll_setting.index', [
-            'payroll_settings' => PayrollSetting::all()
+            'payroll_settings' => $payroll_settings
         ]);
     }
 
@@ -55,6 +59,7 @@ class PayrollSettingController extends Controller
     {
         $payroll_setting               = PayrollSetting::find($request->payroll_setting_id);
         $payroll_setting->payroll_type = $request->payroll_type;
+        $payroll_setting->admin_id = $request->admin_id;
         $payroll_setting->employee_id = $request->employee_id;
         $payroll_setting->department_id = $request->department_id;
         $payroll_setting->late_in_cut = $request->late_in_cut;

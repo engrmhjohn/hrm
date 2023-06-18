@@ -12,6 +12,7 @@
                     <br />
                     <form action="{{ route('admin.save.payroll.setting') }}" method="post">
                         @csrf
+                        <input type="hidden" name="admin_id" value="{{Auth::user()->id}}">
                         <div class="row">
                             <div class="col-md-3">
                                 Payroll Type
@@ -52,48 +53,50 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-lg-12 mb-3">
+                            <div class="col-lg-6 mb-3">
                                 <div class="form-group {{ $errors->has('late_in_cut') ? 'has-error' : '' }}">
                                     <label for="late_in_cut"
-                                        class="control-label">{{ 'Late-In Cut -in % of Basic Salary' }}</label>
+                                        class="control-label">{{ 'Late-In Cut -- % of Basic Salary' }}</label>
                                     <input class="form-control" name="late_in_cut" type="text" id="late_in_cut">
                                     {!! $errors->first('late_in_cut', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
-                            <div class="col-lg-12 mb-3">
+                            <div class="col-lg-6 mb-3">
                                 <div class="form-group {{ $errors->has('early_out_cut') ? 'has-error' : '' }}">
                                     <label for="early_out_cut"
-                                        class="control-label">{{ 'Early-Out Cut -in % of Basic Salary' }}</label>
+                                        class="control-label">{{ 'Early-Out Cut -- % of Basic Salary' }}</label>
                                     <input class="form-control" name="early_out_cut" type="text" id="early_out_cut">
                                     {!! $errors->first('early_out_cut', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
-                            <div class="col-lg-12 mb-3">
+                            <div class="col-lg-6 mb-3">
                                 <div class="form-group {{ $errors->has('unpaid_leave_cut') ? 'has-error' : '' }}">
                                     <label for="unpaid_leave_cut"
-                                        class="control-label">{{ 'Unpaid Leave Cut -in % of Basic Salary' }}</label>
+                                        class="control-label">{{ 'Unpaid Leave Cut -- % of Basic Salary' }}</label>
                                     <input class="form-control" name="unpaid_leave_cut" type="text"
                                         id="unpaid_leave_cut">
                                     {!! $errors->first('unpaid_leave_cut', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
-                            <div class="col-lg-12 mb-3">
+                            <div class="col-lg-6 mb-3">
                                 <div class="form-group {{ $errors->has('absent_cut') ? 'has-error' : '' }}">
                                     <label for="absent_cut"
-                                        class="control-label">{{ 'Absent Cut -in % of Basic Salary' }}</label>
+                                        class="control-label">{{ 'Absent Cut -- % of Basic Salary' }}</label>
                                     <input class="form-control" name="absent_cut" type="text" id="absent_cut">
                                     {!! $errors->first('absent_cut', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
-                            <div class="col-lg-12 mb-3">
+                            <div class="col-lg-6 mb-3">
                                 <div class="form-group {{ $errors->has('bonus') ? 'has-error' : '' }}">
                                     <label for="bonus"
-                                        class="control-label">{{ 'Bonus Get -in % of Basic Salary' }}</label>
+                                        class="control-label">{{ 'Bonus Get -- % of Basic Salary' }}</label>
                                     <input class="form-control" name="bonus" type="text" id="bonus">
                                     {!! $errors->first('bonus', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
-                            <div class="col-lg-12 mb-3">
+                            <div class="col-lg-6 mb-3">
+                                <label for="bonus_month"
+                                class="control-label">{{ 'Select Bonus Month' }}</label>
                                 <select class="form-control show-tick ms search-select" name="bonus_month" data-placeholder="Select Month">
                                     <option value="" disabled selected></option>
                                     <option value="1">January</option>

@@ -18,6 +18,7 @@ class AttendanceController extends Controller
     public function saveAttendanceSetting(Request $request)
     {
         $attendance_setting = new AttendanceSetting();
+        $attendance_setting->admin_id = $request->admin_id;
         $attendance_setting->employee_id = $request->employee_id;
         $attendance_setting->date = $request->date;
         $attendance_setting->in_time = $request->in_time;
@@ -45,8 +46,11 @@ class AttendanceController extends Controller
     }
     public function manageAttendanceSetting()
     {
+        $userId = auth()->user()->id;
+        $attendance_settings = AttendanceSetting::where('admin_id', $userId)
+        ->get();
         return view('admin.attendance_setting.index', [
-            'attendance_settings' => AttendanceSetting::all()
+            'attendance_settings' => $attendance_settings
         ]);
     }
 
@@ -63,6 +67,7 @@ class AttendanceController extends Controller
     public function updateAttendanceSetting(Request $request)
     {
         $attendance_setting               = AttendanceSetting::find($request->attendance_setting_id);
+        $attendance_setting->admin_id = $request->admin_id;
         $attendance_setting->employee_id = $request->employee_id;
         $attendance_setting->date = $request->date;
         $attendance_setting->in_time = $request->in_time;
