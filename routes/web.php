@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CalendarController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\EmployeeLoginController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\MapController;
 use App\Http\Controllers\Admin\PayrollSettingController;
@@ -41,7 +42,6 @@ Route::controller(PaymentController::class)->group(function () {
 
     //buy now
     Route::get('/buy-now/{id}', 'buyNow')->name('package.buy.now')->middleware('auth:admin');
-
 });
 
 
@@ -69,7 +69,33 @@ Route::get('/admin/dashboard', function () {
 
 Route::get('/admin/create-user', [AdminController::class, 'user']);
 
+
+//will be later do it
+Route::prefix('/admin')->name('admin.auth.')->group(function () {
+    // Route::get('/login', [AdminAuthController::class, 'login'])->name('login');
+    // Route::post('/store-login', [AdminAuthController::class, 'storeLogin'])->name('storeLogin');
+    // Route::get('/forgot-password', [AdminForgotPasswordController::class, 'forgotPassword'])->name('forgotPassword');
+    // Route::post('/forgot-password', [AdminForgotPasswordController::class, 'storeForgotPassword'])->name('storeForgotPassword');
+
+    // Route::get('/reset-password/{token}', [AdminResetPasswordController::class, 'resetPassword'])->name('resetPassword');
+    // Route::post('/reset-password', [AdminResetPasswordController::class, 'storeForgotPassword'])->name('storeResetPassword');
+});
+//will be later do it
+
+
 Route::middleware('auth:admin')->name('admin.')->group(function () {
+
+    //Employee management
+    Route::controller(EmployeeLoginController::class)->name('auth.')->group(function () {
+        Route::get('/worker-list', 'workerList')->name('workerList');
+        Route::get('/create-worker', 'createWorker')->name('createWorker');
+        Route::post('/store-worker', 'storeWorker')->name('storeWorker');
+        Route::get('/edit-worker/{worker}', 'editWorker')->name('editWorker');
+        Route::post('/update-worker', 'updateWorker')->name('updateWorker');
+        Route::delete('/delete-worker/{worker}', 'deleteWorker')->name('deleteWorker');
+    });
+
+    // Route::post('/logout', [EmployeeLoginController::class, 'logout'])->name('auth.logout');
 
     Route::controller(UserInfoController::class)->prefix('/admin')->name('admin.')->group(function () {
         Route::get('/admin-profile', 'adminProfile')->name('admin_profile');

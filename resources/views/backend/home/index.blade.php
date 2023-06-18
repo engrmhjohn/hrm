@@ -3,7 +3,7 @@
     <div class="row clearfix">
         @php
             $userId = auth()->user()->id; // Get the ID of the logged-in user
-            $total_employee = App\Models\Employee::where('status', '1')
+            $total_employee = App\Models\User::where('status', '1')
                 ->where('admin_id', $userId)
                 ->get();
             $employee_count = $total_employee->count();

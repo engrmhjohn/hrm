@@ -40,6 +40,13 @@
             @endif
             @if ($valid_user && $valid_user->status == 'Paid')
                 <li><a href="javascript:void(0);" class="menu-toggle"><i
+                            class="zmdi zmdi-account"></i><span>Worker</span></a>
+                    <ul class="ml-menu">
+                        <li><a href="{{ route('admin.auth.workerList') }}">Worker List</a></li>
+                        <li><a href="{{ route('admin.auth.createWorker') }}">Add New Worker</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:void(0);" class="menu-toggle"><i
                             class="zmdi zmdi-apps"></i><span>Department</span></a>
                     <ul class="ml-menu">
                         <li><a href="{{ route('admin.manage.department') }}">Department List</a></li>
@@ -112,7 +119,7 @@
                     </ul>
                 </li>
             @else
-            <a class="btn btn-outline-success text-white" href="{{url('/')}}">Buy Plan to Access More</a>
+                <a class="btn btn-outline-success text-white" href="{{ url('/') }}">Buy Plan to Access More</a>
             @endif
         </ul>
     </div>
