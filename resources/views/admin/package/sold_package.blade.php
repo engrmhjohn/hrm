@@ -23,7 +23,6 @@
                                     <th>Buyer Name</th>
                                     <th>Buyer ID</th>
                                     <th>Package Name</th>
-                                    <th>Package Description</th>
                                     <th>Package Amount</th>
                                     <th>Currency</th>
                                     <th>Email</th>
@@ -41,7 +40,6 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->customer_id }}</td>
                                         <td>{{ $item->package->name ?? '' }}</td>
-                                        <td>{!! $item->package->description ?? '' !!}</td>
                                         <td>{{ $item->amount }}</td>
                                         <td>{{ $item->currency }}</td>
                                         <td>{{ $item->email }}</td>
