@@ -38,8 +38,9 @@
                 </div>
                 <div class="card-body">
                     <img class="img-fluid mx-auto" src="{{asset($item->image)}}" alt="" style="max-height: 200px; width: 100%;">
-                    {!! $item->description !!}
-                    <h4>Price: {{$item->price}} BDT</h4>
+                    <h5>Price: {{$item->price}} BDT</h5>
+                    <h5>No of User: {{$item->user}}</h5>
+                    <h5>Validity: {{$item->validity}} Months</h5>
                 </div>
                 <div class="card-footer text-center">
                     <a class="btn btn-warning form-control" href="{{route('package.buy.now', $item->id)}}">Buy Now</a>
