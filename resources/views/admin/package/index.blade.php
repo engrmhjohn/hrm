@@ -40,7 +40,8 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Price</th>
-                                    <th>Description</th>
+                                    <th>User</th>
+                                    <th>Validity</th>
                                     <th>Image</th>
                                     <th>Status</th>
                                     <th>Actions</th>
@@ -52,7 +53,8 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->price }}</td>
-                                        <td>{!! $item->description !!}</td>
+                                        <td>{{ $item->user }}</td>
+                                        <td>{{ $item->validity }}</td>
                                         <td>
                                             <img src="{{asset($item->image)}}" alt="" style="width: 100px;">
                                         </td>

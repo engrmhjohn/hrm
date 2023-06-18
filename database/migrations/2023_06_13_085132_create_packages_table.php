@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('price');
+            $table->string('validity');
+            $table->string('user');
             $table->text('image');
             $table->longText('description')->nullable();
             $table->string('status')->default('1');

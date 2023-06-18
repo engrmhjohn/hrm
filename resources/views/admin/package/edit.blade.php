@@ -29,13 +29,23 @@
                                     {!! $errors->first('price', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
-                            <div class="col-lg-12">
-                                <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
-                                    <label for="description" class="control-label">{{ 'Description' }}</label>
-                                    <textarea class="summernote" name="description" type="text" id="description">{{ isset($package->description) ? $package->description : '' }}</textarea>
-                                    {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
+                            <div class="col-lg-6">
+                                <div class="form-group {{ $errors->has('user') ? 'has-error' : '' }}">
+                                    <label for="user" class="control-label">{{ 'User' }}</label>
+                                    <input class="form-control" name="user" type="text" id="user"
+                                        value="{{ isset($package->user) ? $package->user : '' }}">
+                                    {!! $errors->first('user', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
+                            <div class="col-lg-6">
+                                <div class="form-group {{ $errors->has('validity') ? 'has-error' : '' }}">
+                                    <label for="validity" class="control-label">{{ 'Validity' }}</label>
+                                    <input class="form-control" name="validity" type="text" id="validity"
+                                        value="{{ isset($package->validity) ? $package->validity : '' }}">
+                                    {!! $errors->first('validity', '<p class="help-block">:message</p>') !!}
+                                </div>
+                            </div>
+
                             <div class="col-md-3 mt-3">
                                 Status
                             </div>
@@ -50,6 +60,23 @@
                                         <input type="radio" name="status"
                                             {{ $package->status == 0 ? 'checked' : '' }} id="unublish" class="with-gap" value="0">
                                         <label for="unublish">Unpublish</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="card">
+                                    <div class="header">
+                                        <h2>package Current Image</h2>
+                                        <img src="{{ asset($package->image) }}" alt=""
+                                            style="height: 200px; width: 200px;" class="mb-3">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="card">
+                                    <div class="body">
+                                        <input type="file" name="image" class="dropify"
+                                            value="{{ isset($package->image) ? $package->image : '' }}">
                                     </div>
                                 </div>
                             </div>

@@ -18,7 +18,8 @@ class PackageController extends Controller
        $package->name = $request->name;
        $package->price = $request->price;
        $package->image = image_upload($request->image);
-       $package->description = $request->description;
+       $package->user = $request->user;
+       $package->validity = $request->validity;
        $package->status = $request->status;
        $package->save();
        return redirect(route('admin.manage.package'))->with('message','Successfully Added!');
@@ -41,7 +42,8 @@ class PackageController extends Controller
         $package               = Package::find($request->package_id);
         $package->name = $request->name;
         $package->price = $request->price;
-        $package->description = $request->description;
+        $package->user = $request->user;
+        $package->validity = $request->validity;
         $package->status = $request->status;
         if ($request->file('image')) {
             if ($package->image) {

@@ -26,6 +26,20 @@
                                     {!! $errors->first('price', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
+                            <div class="col-lg-6">
+                                <div class="form-group {{ $errors->has('user') ? 'has-error' : '' }}">
+                                    <label for="user" class="control-label">{{ 'User' }}</label>
+                                    <input class="form-control" name="user" type="text" id="user">
+                                    {!! $errors->first('user', '<p class="help-block">:message</p>') !!}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group {{ $errors->has('validity') ? 'has-error' : '' }}">
+                                    <label for="validity" class="control-label">{{ 'Validity' }}</label>
+                                    <input class="form-control" name="validity" type="text" id="validity">
+                                    {!! $errors->first('validity', '<p class="help-block">:message</p>') !!}
+                                </div>
+                            </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="card">
                                     <div class="header">
@@ -35,13 +49,6 @@
                                         <input type="file" name="image" class="dropify">
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
-                                <label for="description" class="control-label">{{ 'Description' }}</label>
-                                <textarea class="summernote" name="description" type="text" id="description"></textarea>
-                                {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
                             </div>
                         </div>
                         <div class="col-md-3 mt-3">
