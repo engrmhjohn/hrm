@@ -11,6 +11,7 @@ use App\Models\Location;
 use App\Models\Designation;
 use App\Models\Shift;
 use App\Models\PaySlip;
+use App\Models\OrderInfo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
@@ -46,6 +47,7 @@ class EmployeeLoginController extends Controller
 
     public function storeWorker(Request $request)
     {
+        Validate the request
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'phone' => 'required|numeric',
@@ -59,6 +61,18 @@ class EmployeeLoginController extends Controller
             return back()->with('error', $validator->messages()->all())->withInput();
         }
 
+        // Get the current admin's latest order info and check the user limit
+        $orderInfo = OrderInfo::where('customer_id', auth()->user()->id)
+            ->orderBy('transaction_id', 'desc')
+            ->first();
+
+        $userCount = User::where('admin_id', auth()->user()->id)->count();
+
+        if ($userCount >= $orderInfo->package->user) {
+            return redirect()->route('admin.auth.workerList')->with('message', 'User limit Reached for the Current Package!!');
+        }
+
+        // Handle image upload
         if ($request->hasFile('image')) {
             $image_file = $request->file('image');
 
@@ -72,9 +86,9 @@ class EmployeeLoginController extends Controller
             }
         }
 
-
+        // Create a new worker instance
         $worker = new User();
-        $worker->admin_id = $request->admin_id;
+        $worker->admin_id = auth()->user()->id; 
         $worker->name = $request->name;
         $worker->phone = $request->phone;
         $worker->email = $request->email;
@@ -95,6 +109,11 @@ class EmployeeLoginController extends Controller
 
         return redirect()->route('admin.auth.workerList')->with('message', 'New Worker Registered Successfully!!');
     }
+
+
+
+
+
 
 
     public function workerList()

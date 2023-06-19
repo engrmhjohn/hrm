@@ -45,22 +45,26 @@ class User extends Authenticatable
 
     public function designation()
     {
-        return $this->hasOne(Designation::class,'id','designation_id');
+        return $this->hasOne(Designation::class, 'id', 'designation_id');
     }
     public function department()
     {
-        return $this->hasOne(Department::class,'id','department_id');
+        return $this->hasOne(Department::class, 'id', 'department_id');
     }
     public function paySlip()
     {
-        return $this->hasOne(PaySlip::class,'id','pay_slip_id');
+        return $this->hasOne(PaySlip::class, 'id', 'pay_slip_id');
     }
     public function shift()
     {
-        return $this->hasOne(Shift::class,'id','shift_id');
+        return $this->hasOne(Shift::class, 'id', 'shift_id');
     }
     public function location()
     {
-        return $this->hasOne(Location::class,'id','location_id');
+        return $this->hasOne(Location::class, 'id', 'location_id');
+    }
+    public function orderInfo()
+    {
+        return $this->belongsTo(OrderInfo::class, 'customer_id');
     }
 }
