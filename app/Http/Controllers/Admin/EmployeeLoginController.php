@@ -110,12 +110,6 @@ class EmployeeLoginController extends Controller
         return redirect()->route('admin.auth.workerList')->with('message', 'New Worker Registered Successfully!!');
     }
 
-
-
-
-
-
-
     public function workerList()
     {
         $userId = auth()->user()->id;

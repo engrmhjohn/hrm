@@ -42,6 +42,13 @@
             <li class="active open"><a href="{{ url('/admin/dashboard') }}"><i
                         class="zmdi zmdi-home"></i><span>Dashboard</span></a>
             </li>
+            <li><a href="javascript:void(0);" class="menu-toggle"><i
+                        class="zmdi zmdi-account"></i><span>Profile</span></a>
+                <ul class="ml-menu">
+                    <li><a href="{{ route('admin.profile') }}">My Profile</a></li>
+                    <li><a href="{{ route('admin.complete_form', Auth::user()->id) }}">Edit My Profile</a></li>
+                </ul>
+            </li>
             @if (Auth::user()->role == 1)
                 <li><a href="javascript:void(0);" class="menu-toggle"><i
                             class="zmdi zmdi-apps"></i><span>Package</span></a>
@@ -54,10 +61,10 @@
             @endif
             @if ($privilege_user || Auth::user()->role == 1)
                 <li><a href="javascript:void(0);" class="menu-toggle"><i
-                            class="zmdi zmdi-account"></i><span>Worker</span></a>
+                            class="zmdi zmdi-account"></i><span>Employee</span></a>
                     <ul class="ml-menu">
-                        <li><a href="{{ route('admin.auth.workerList') }}">Worker List</a></li>
-                        <li><a href="{{ route('admin.auth.createWorker') }}">Add New Worker</a></li>
+                        <li><a href="{{ route('admin.auth.workerList') }}">Employee List</a></li>
+                        <li><a href="{{ route('admin.auth.createWorker') }}">Add New Employee</a></li>
                     </ul>
                 </li>
                 <li><a href="javascript:void(0);" class="menu-toggle"><i
@@ -89,14 +96,6 @@
                     <ul class="ml-menu">
                         <li><a href="{{ route('admin.manage.pay_slip') }}">Pay Slip List</a></li>
                         <li><a href="{{ route('admin.pay_slip') }}">Add New Pay Slip</a></li>
-                    </ul>
-                </li>
-
-                <li><a href="javascript:void(0);" class="menu-toggle"><i
-                            class="zmdi zmdi-account"></i><span>Employee</span></a>
-                    <ul class="ml-menu">
-                        <li><a href="{{ route('admin.manage.employee') }}">Employee List</a></li>
-                        <li><a href="{{ route('admin.employee') }}">Add New Employee</a></li>
                     </ul>
                 </li>
 
