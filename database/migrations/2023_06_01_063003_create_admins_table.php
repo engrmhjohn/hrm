@@ -16,7 +16,15 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone')->nullable();
-            $table->text('image')->nullable();
+            $table->string('designation')->nullable();
+            $table->string('admin_image')->nullable();
+
+            $table->string('company_name')->nullable();
+            $table->string('company_phone')->nullable();
+            $table->string('company_address')->nullable();
+            $table->string('company_type')->nullable();
+            $table->string('company_employee')->nullable();
+            $table->text('logo')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role')->default('1');

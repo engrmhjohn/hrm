@@ -46,7 +46,6 @@
                         class="zmdi zmdi-account"></i><span>Profile</span></a>
                 <ul class="ml-menu">
                     <li><a href="{{ route('admin.profile') }}">My Profile</a></li>
-                    <li><a href="{{ route('admin.complete_form', Auth::user()->id) }}">Edit My Profile</a></li>
                 </ul>
             </li>
             @if (Auth::user()->role == 1)
