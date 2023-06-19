@@ -7,6 +7,20 @@
                 ->where('admin_id', $userId)
                 ->get();
             $employee_count = $total_employee->count();
+
+            //to get the maximum user limit
+            $orderInfo = App\Models\OrderInfo::where('customer_id', auth()->user()->id)
+                ->where('status', 'Paid')
+                ->with('package')
+                ->orderBy('transaction_id', 'desc')
+                ->first();
+
+            if ($orderInfo) {
+                $userLimit = $orderInfo->package->user;
+            } else {
+                $userLimit = 10;
+            }
+
         @endphp
         @php
             $userId = auth()->user()->id; // Get the ID of the logged-in user
@@ -34,15 +48,12 @@
                 <div class="body">
                     <h6>Total Employee</h6>
                     <h2> {{ $employee_count }} </h2>
-                    @php
-                        $max_count = 10; // Set the maximum count value for 100% width of the progress bar
-                    @endphp
-                      <small>Total Registered Employee</small>
+                    <small>Total Registered Employee</small>
                     <div class="progress">
                         @if ($employee_count > 0)
                             <div class="progress-bar l-green" role="progressbar" aria-valuenow="{{ $employee_count }}"
                                 aria-valuemin="0" aria-valuemax="100"
-                                style="width: {{ ($employee_count / $max_count) * 100 }}%;"></div>
+                                style="width: {{ ($employee_count / $userLimit) * 100 }}%;"></div>
                         @else
                             <div class="progress-bar l-green" role="progressbar" aria-valuenow="0" aria-valuemin="0"
                                 aria-valuemax="100" style="width: 0%;"></div>
@@ -59,7 +70,7 @@
                     @php
                         $max_count = 10; // Set the maximum count value for 100% width of the progress bar
                     @endphp
-                      <small>Total Registered Department</small>
+                    <small>Total Registered Department</small>
                     <div class="progress">
                         @if ($department_count > 0)
                             <div class="progress-bar l-green" role="progressbar" aria-valuenow="{{ $department_count }}"
@@ -81,7 +92,7 @@
                     @php
                         $max_count = 10; // Set the maximum count value for 100% width of the progress bar
                     @endphp
-                      <small>Total Registered Designation</small>
+                    <small>Total Registered Designation</small>
                     <div class="progress">
                         @if ($designation_count > 0)
                             <div class="progress-bar l-green" role="progressbar" aria-valuenow="{{ $designation_count }}"

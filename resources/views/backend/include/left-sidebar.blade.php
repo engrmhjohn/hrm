@@ -52,7 +52,7 @@
                     </ul>
                 </li>
             @endif
-            @if ($privilege_user)
+            @if ($privilege_user || Auth::user()->role == 1)
                 <li><a href="javascript:void(0);" class="menu-toggle"><i
                             class="zmdi zmdi-account"></i><span>Worker</span></a>
                     <ul class="ml-menu">

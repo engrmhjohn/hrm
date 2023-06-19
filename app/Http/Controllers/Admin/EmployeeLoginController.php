@@ -47,7 +47,7 @@ class EmployeeLoginController extends Controller
 
     public function storeWorker(Request $request)
     {
-        Validate the request
+        //Validate the request
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'phone' => 'required|numeric',
@@ -88,7 +88,7 @@ class EmployeeLoginController extends Controller
 
         // Create a new worker instance
         $worker = new User();
-        $worker->admin_id = auth()->user()->id; 
+        $worker->admin_id = auth()->user()->id;
         $worker->name = $request->name;
         $worker->phone = $request->phone;
         $worker->email = $request->email;
