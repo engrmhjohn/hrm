@@ -5,17 +5,31 @@
                 alt="Aero"><span class="m-l-10">HRM</span></a>
     </div>
     @php
+        use Carbon\Carbon;
+
         $userId = auth()->user()->id;
         $valid_user = App\Models\OrderInfo::where('customer_id', $userId)
             ->where('status', 'Paid')
+            ->with('package')
+            ->whereHas('package', function ($query) {
+                $query->where('validity', '>', 0);
+            })
+            ->orderBy('created_at', 'desc')
             ->first();
+
+        $privilege_user = false;
+        if ($valid_user) {
+            $expiryDate = Carbon::parse($valid_user->created_at)->addMonths($valid_user->package->validity);
+            $privilege_user = $expiryDate->greaterThanOrEqualTo(Carbon::now());
+        }
     @endphp
+
     <div class="menu">
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <a class="image" href="profile.html"><img src="{{ asset('adminAssets') }}/images/profile_av.jpg"
-                            alt="User"></a>
+                    <a class="image" href="{{ url('/admin/dashboard') }}"><img
+                            src="{{ asset('adminAssets') }}/images/profile_av.jpg" alt="User"></a>
                     <div class="detail">
                         <h4>{{ Auth::user()->name }}</h4>
                         @php
@@ -38,7 +52,7 @@
                     </ul>
                 </li>
             @endif
-            @if ($valid_user && $valid_user->status == 'Paid')
+            @if ($privilege_user)
                 <li><a href="javascript:void(0);" class="menu-toggle"><i
                             class="zmdi zmdi-account"></i><span>Worker</span></a>
                     <ul class="ml-menu">
@@ -119,7 +133,8 @@
                     </ul>
                 </li>
             @else
-                <a class="btn btn-outline-success text-white" href="{{ url('/') }}">Buy Plan to Access More</a>
+                <a class="btn btn-outline-success text-white" href="{{ url('/') }}">Buy/Extend Plan to Access
+                    More</a>
             @endif
         </ul>
     </div>

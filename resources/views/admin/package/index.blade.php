@@ -18,23 +18,11 @@
                     <a href="{{ route('admin.package') }}" class="btn btn-success btn-sm" title="Add New">
                         <i class="zmdi zmdi-plus" aria-hidden="true"></i> Add New
                     </a>
-                    <form method="GET" action="" accept-charset="UTF-8" class="form-inline"
-                        role="search" style="width: 25%;float: right;">
-                        <div class="search form-inline">
-                            <div class="input-group mb-0">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <div class="input-group-append">
-                                    <span class="input-group-text" id="basic-addon2"><i class="zmdi zmdi-search"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
 
                     <br />
                     <br />
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -54,7 +42,7 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->price }}</td>
                                         <td>{{ $item->user }}</td>
-                                        <td>{{ $item->validity }}</td>
+                                        <td>{{ $item->validity }} Months</td>
                                         <td>
                                             <img src="{{asset($item->image)}}" alt="" style="width: 100px;">
                                         </td>

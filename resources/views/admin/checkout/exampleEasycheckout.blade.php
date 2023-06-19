@@ -14,7 +14,6 @@
                 <div class="row">
                     <div class="col-md-6 order-md-1">
                         <h4 class="mb-3">Customer Information</h4>
-
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <label for="firstName">Name</label>

@@ -8,7 +8,7 @@ use DB;
 use App\Library\SslCommerz\SslCommerzNotification;
 use App\Models\Package;
 use App\Models\OrderInfo;
-
+use Carbon\Carbon;
 
 class PaymentController extends Controller
 {
@@ -109,7 +109,9 @@ class PaymentController extends Controller
                 'amount' => $post_data['total_amount'],
                 'status' => 'Pending',
                 'address' => $post_data['cus_add1'],
-                'currency' => $post_data['currency']
+                'currency' => $post_data['currency'],
+                'created_at' => Carbon::now()->format('Y-m-d'),
+                'updated_at' => Carbon::now()->format('Y-m-d')
             ]
         );
 
